@@ -79,7 +79,7 @@ class Tendering_paketulang_model extends CI_Model {
             SUM(pkt_hps) AS jml_hps_ulang,
             SUM(pkt_pagu) AS jml_pagu_ulang
         ");
-        $this->pg_db->from("status_lelang");
+        $this->pg_db->from("sip.status_lelang");
         $this->pg_db->where("lls_diulang_karena IS NOT NULL");
         $this->pg_db->where("lls_versi_lelang >", 1);
         $this->pg_db->where("lls_status", 1);
@@ -101,7 +101,7 @@ class Tendering_paketulang_model extends CI_Model {
             SUM(pkt_hps) AS jml_hps_ulang,
             SUM(pkt_pagu) AS jml_pagu_ulang
         ");
-        $this->pg_db->from("status_lelang");
+        $this->pg_db->from("sip.status_lelang");
         $this->pg_db->where("lls_diulang_karena IS NOT NULL");
         $this->pg_db->where("lls_versi_lelang >", 1);
         $this->pg_db->where("lls_status", 1);
@@ -131,7 +131,7 @@ class Tendering_paketulang_model extends CI_Model {
                 END
             ) AS alasan
         ");
-        $this->pg_db->from("status_lelang");
+        $this->pg_db->from("sip.status_lelang");
         $this->pg_db->where("lls_diulang_karena IS NOT NULL");
         $this->pg_db->where("lls_versi_lelang >", 1);
         $this->pg_db->where("lls_status", 1);

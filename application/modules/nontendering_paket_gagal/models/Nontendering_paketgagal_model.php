@@ -78,8 +78,8 @@ class Nontendering_paketgagal_model extends CI_Model {
     //         COUNT(a.pkt_nama) AS jml_pkt_ulang,
     //         SUM(a.pkt_pagu) AS jml_pagu_ulang
     //     ");
-    //     $this->pg_db->from("narno_pl_semua a");
-    //     $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+    //     $this->pg_db->from("sip.narno_pl_semua a");
+    //     $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
     //     $this->pg_db->where("b.lls_diulang_karena IS NOT NULL");
     //     $this->pg_db->where("b.lls_versi_lelang >", 1);
     //     $this->pg_db->where("b.lls_status", 1);
@@ -98,8 +98,8 @@ class Nontendering_paketgagal_model extends CI_Model {
             COUNT(a.pkt_nama) AS jml_pkt_gagal,
             SUM(a.pkt_pagu) AS jml_pagu_gagal
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->from("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->from("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->where("b.lls_ditutup_karena IS NOT NULL");
         $this->pg_db->where("b.lls_versi_lelang >", 1);
         $this->pg_db->where("b.lls_status", 2);
@@ -117,8 +117,8 @@ class Nontendering_paketgagal_model extends CI_Model {
             COUNT(a.pkt_nama) AS jml_pkt_gagal,
             SUM(a.pkt_pagu) AS jml_pagu_gagal
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->from("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->from("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->where("b.lls_ditutup_karena IS NOT NULL");
         $this->pg_db->where("b.lls_versi_lelang >", 1);
         $this->pg_db->where("b.lls_status", 2);
@@ -138,8 +138,8 @@ class Nontendering_paketgagal_model extends CI_Model {
             a.pkt_pagu, 
             b.lls_ditutup_karena as alasan
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->from("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->from("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->where("b.lls_ditutup_karena IS NOT NULL");
         $this->pg_db->where("b.lls_versi_lelang >", 1);
         $this->pg_db->where("b.lls_status", 2);
@@ -154,8 +154,8 @@ class Nontendering_paketgagal_model extends CI_Model {
 
     public function total_data_gagal($tahun){
         $this->pg_db->select("SUM(a.pkt_pagu) AS pkt_pagu");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->from("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->from("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->where("b.lls_ditutup_karena IS NOT NULL");
         $this->pg_db->where("b.lls_versi_lelang >", 1);
         $this->pg_db->where("b.lls_status", 2);

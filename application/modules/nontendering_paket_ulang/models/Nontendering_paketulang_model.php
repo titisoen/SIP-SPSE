@@ -78,8 +78,8 @@ class Nontendering_paketulang_model extends CI_Model {
             COUNT(a.pkt_nama) AS jml_pkt_ulang,
             SUM(a.pkt_pagu) AS jml_pagu_ulang
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->where("b.lls_diulang_karena IS NOT NULL");
         $this->pg_db->where("b.lls_versi_lelang >", 1);
         $this->pg_db->where("b.lls_status", 1);
@@ -97,8 +97,8 @@ class Nontendering_paketulang_model extends CI_Model {
             COUNT(a.pkt_nama) AS jml_pkt_ulang,
             SUM(a.pkt_pagu) AS jml_pagu_ulang
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->where("b.lls_diulang_karena IS NOT NULL");
         $this->pg_db->where("b.lls_versi_lelang >", 1);
         $this->pg_db->where("b.lls_status", 1);
@@ -124,8 +124,8 @@ class Nontendering_paketulang_model extends CI_Model {
                 END
             ) AS alasan
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->where("b.lls_diulang_karena IS NOT NULL");
         $this->pg_db->where("b.lls_versi_lelang >", 1);
         $this->pg_db->where("b.lls_status", 1);
@@ -140,8 +140,8 @@ class Nontendering_paketulang_model extends CI_Model {
 
     public function total_data_retendering($tahun){
         $this->pg_db->select("a.pkt_pagu");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->where("b.lls_diulang_karena IS NOT NULL");
         $this->pg_db->where("b.lls_versi_lelang >", 1);
         $this->pg_db->where("b.lls_status", 1);

@@ -66,7 +66,7 @@ class Rekanan_profil_model extends CI_Model {
 
     public function get_total_pagu_apbd($tahun){
         $this->local_db->select("SUM(btl) AS btl, SUM(bl) AS bl");
-        $this->local_db->from("rekap_apbd");
+        $this->local_db->from("sip.rekap_apbd");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun);
         }
@@ -80,7 +80,7 @@ class Rekanan_profil_model extends CI_Model {
 
     public function get_total_opd($tahun){
         $this->local_db->select("COUNT(id_satker) AS total_opd");
-        $this->local_db->from("rekap_apbd");
+        $this->local_db->from("sip.rekap_apbd");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun);
         }
@@ -250,7 +250,7 @@ class Rekanan_profil_model extends CI_Model {
             COUNT(CASE WHEN kualifikasi = 'Gabungan' THEN kode_kualifikasi END) AS gab,
             COUNT(CASE WHEN kualifikasi = 'Belum Pilih Kualifikasi' THEN kode_kualifikasi END) AS blm
         ");
-        $this->pg_db->from("narno_kualifikasi");
+        $this->pg_db->from("sip.narno_kualifikasi");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -273,7 +273,7 @@ class Rekanan_profil_model extends CI_Model {
             COUNT(CASE WHEN kualifikasi = 'Gabungan' THEN kode_kualifikasi END) AS gab,
             COUNT(CASE WHEN kualifikasi = 'Belum Pilih Kualifikasi' THEN kode_kualifikasi END) AS blm
         ");
-        $this->pg_db->from("narno_kualifikasi");
+        $this->pg_db->from("sip.narno_kualifikasi");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }

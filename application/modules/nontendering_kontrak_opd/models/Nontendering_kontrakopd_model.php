@@ -79,8 +79,8 @@ class Nontendering_kontrakopd_model extends CI_Model {
             (COUNT(a.lls_id) - COUNT(b.lls_id))  AS paket_belum_selesai,
             SUM(CASE WHEN c.kontrak_id > 0 THEN 1 ELSE 0 END) AS total_kontrak
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->join("ekontrak.kontrak c", "b.lls_id = c.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("b.tahun", $tahun+0);
@@ -97,8 +97,8 @@ class Nontendering_kontrakopd_model extends CI_Model {
             SUM(b.harga_terkoreksi) AS nilai_penawaran,
             SUM(c.kontrak_nilai) AS nilai_kontrak
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->join("ekontrak.kontrak c", "b.lls_id = c.lls_id");
         $this->pg_db->where("c.kontrak_id >", 0);
         if ($tahun != 'all') {
@@ -116,8 +116,8 @@ class Nontendering_kontrakopd_model extends CI_Model {
             SUM(b.harga_terkoreksi) AS nilai_penawaran,
             SUM(c.kontrak_nilai) AS nilai_kontrak
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->join("ekontrak.kontrak c", "b.lls_id = c.lls_id");
         $this->pg_db->where("c.kontrak_id >", 0);
         if ($tahun != 'all') {
@@ -152,10 +152,10 @@ class Nontendering_kontrakopd_model extends CI_Model {
             TO_CHAR(c.kontrak_akhir, 'DD Mon YYYY') AS kontrak_akhir,
             b.sbd_ket
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->join("ekontrak.kontrak c", "b.lls_id = c.lls_id");
-        $this->pg_db->join("narno_pl_rup d", "a.lls_id = d.lls_id");
+        $this->pg_db->join("sip.narno_pl_rup d", "a.lls_id = d.lls_id");
         $this->pg_db->where("c.kontrak_id >", 0);
         if ($tahun != 'all') {
             $this->pg_db->where("b.tahun", $tahun+0);

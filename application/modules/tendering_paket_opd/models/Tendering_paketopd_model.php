@@ -86,7 +86,7 @@ class Tendering_paketopd_model extends CI_Model {
             COUNT(lls_id) AS t_paket, 
             (SUM(pkt_hps)/1000000) AS t_hps
         ");
-        $this->pg_db->from("narno_semua");
+        $this->pg_db->from("sip.narno_semua");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -111,7 +111,7 @@ class Tendering_paketopd_model extends CI_Model {
             COUNT(lls_id) AS t_paket, 
             (SUM(pkt_hps)/1000000) AS t_hps
         ");
-        $this->pg_db->from("narno_semua");
+        $this->pg_db->from("sip.narno_semua");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -152,8 +152,8 @@ class Tendering_paketopd_model extends CI_Model {
             COUNT(b.rkn_nama) AS ts_paket,
             (COUNT(a.lls_id) - COUNT(b.rkn_nama)) AS tb_paket
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -200,8 +200,8 @@ class Tendering_paketopd_model extends CI_Model {
             COUNT(a.lls_id) AS jml_satker_t_paket,
             (COUNT(a.lls_id) - COUNT(b.rkn_nama)) AS jml_satker_tb_paket
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }

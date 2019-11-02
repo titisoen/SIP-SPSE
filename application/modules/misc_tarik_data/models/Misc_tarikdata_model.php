@@ -6,14 +6,14 @@ class Misc_tarikdata_model extends CI_Model {
     public function __construct()
     {
         $this->local_db = $this->load->database('default', TRUE);
-        $this->smep_db = $this->load->database('smep_database', TRUE);
+        //$this->smep_db = $this->load->database('smep_database', TRUE);
         $this->pg_db = $this->load->database('pg_database', TRUE);
     }
 
 
     public function get_all_data_info_privasi(){
         $this->local_db->select("*");
-        $this->local_db->from("tbl_misc");
+        $this->local_db->from("sip.tbl_misc");
         $this->local_db->where("slug", "info_privasi");
         $data = $this->local_db->get();
         return $data;
@@ -25,22 +25,22 @@ class Misc_tarikdata_model extends CI_Model {
     * --------------------------------- */
     public function delete_penyedia_tayang($tahun){
         $this->local_db->where("tahun", $tahun);
-        $this->local_db->delete("tbl_pkt_penyedia");
+        $this->local_db->delete("sip.tbl_pkt_penyedia");
         return TRUE;
     }
 
     public function insert_penyedia_tayang($data){
-        $this->local_db->insert("tbl_pkt_penyedia", $data);
+        $this->local_db->insert("sip.tbl_pkt_penyedia", $data);
     }
 
     public function delete_penyedia_draft($tahun){
         $this->local_db->where("tahun", $tahun);
-        $this->local_db->delete("tbl_pkt_penyedia_belum");
+        $this->local_db->delete("sip.tbl_pkt_penyedia_belum");
         return TRUE;
     }
 
     public function insert_penyedia_draft($data){
-        $this->local_db->insert("tbl_pkt_penyedia_belum", $data);
+        $this->local_db->insert("sip.tbl_pkt_penyedia_belum", $data);
     }
 
 
@@ -49,22 +49,22 @@ class Misc_tarikdata_model extends CI_Model {
     * --------------------------------- */
     public function delete_swakelola_tayang($tahun){
         $this->local_db->where("tahun", $tahun);
-        $this->local_db->delete("tbl_pkt_swakelola");
+        $this->local_db->delete("sip.tbl_pkt_swakelola");
         return TRUE;
     }
 
     public function insert_swakelola_tayang($data){
-        $this->local_db->insert("tbl_pkt_swakelola", $data);
+        $this->local_db->insert("sip.tbl_pkt_swakelola", $data);
     }
 
     public function delete_swakelola_draft($tahun){
         $this->local_db->where("tahun", $tahun);
-        $this->local_db->delete("tbl_pkt_swakelola_belum");
+        $this->local_db->delete("sip.tbl_pkt_swakelola_belum");
         return TRUE;
     }
 
     public function insert_swakelola_draft($data){
-        $this->local_db->insert("tbl_pkt_swakelola_belum", $data);
+        $this->local_db->insert("sip.tbl_pkt_swakelola_belum", $data);
     }
 
     /* -----------------------------------
@@ -72,7 +72,7 @@ class Misc_tarikdata_model extends CI_Model {
     * --------------------------------- */
     public function select_epurchasing($no_paket, $rup_id, $nama_paket, $total){
         $this->local_db->select("*");
-        $this->local_db->from("tbl_pkt_epurchasing");
+        $this->local_db->from("sip.tbl_pkt_epurchasing");
         $this->local_db->where("no_paket", $no_paket);
         $this->local_db->where("rup_id", $rup_id);
         $this->local_db->where("nama_paket", $nama_paket);
@@ -82,12 +82,12 @@ class Misc_tarikdata_model extends CI_Model {
     }    
 
     public function insert_epurchasing($data){
-        $this->local_db->insert("tbl_pkt_epurchasing", $data);
+        $this->local_db->insert("sip.tbl_pkt_epurchasing", $data);
     }
 
     public function update_epurchasing($id, $data){
         $this->local_db->where("no_paket", $id);
-        $this->local_db->update("tbl_pkt_epurchasing", $data);
+        $this->local_db->update("sip.tbl_pkt_epurchasing", $data);
     }
 
     /* -----------------------------------
@@ -121,7 +121,7 @@ class Misc_tarikdata_model extends CI_Model {
 
     public function delete_struktur_anggaran($tahun){
         $this->local_db->where("tahun", $tahun);
-        $process = $this->local_db->delete("table_apbd");
+        $process = $this->local_db->delete("sip.table_apbd");
         if ($process) {
             return TRUE;
         }
@@ -131,7 +131,7 @@ class Misc_tarikdata_model extends CI_Model {
     }
 
     public function insert_struktur_anggaran($data){
-        $process = $this->local_db->insert("table_apbd", $data);
+        $process = $this->local_db->insert("sip.table_apbd", $data);
         if ($process) {
             return TRUE;
         }

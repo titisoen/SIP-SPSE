@@ -66,7 +66,7 @@ class Sirup_data_model extends CI_Model {
 
     public function get_total_pagu_apbd($tahun){
         $this->local_db->select("SUM(btl) AS btl, SUM(bl) AS bl");
-        $this->local_db->from("rekap_apbd");
+        $this->local_db->from("sip.rekap_apbd");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun);
         }
@@ -80,7 +80,7 @@ class Sirup_data_model extends CI_Model {
 
     public function get_total_opd($tahun){
         $this->local_db->select("COUNT(id_satker) AS total_opd");
-        $this->local_db->from("rekap_apbd");
+        $this->local_db->from("sip.rekap_apbd");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun);
         }
@@ -102,7 +102,7 @@ class Sirup_data_model extends CI_Model {
 
     public function paket_opd($tahun){
         $this->local_db->select("*");
-        $this->local_db->from("tbl_pkt_sirup");
+        $this->local_db->from("sip.tbl_pkt_sirup");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }

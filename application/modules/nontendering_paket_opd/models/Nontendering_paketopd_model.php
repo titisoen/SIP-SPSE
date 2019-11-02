@@ -86,7 +86,7 @@ class Nontendering_paketopd_model extends CI_Model {
             COUNT(lls_id) AS t_paket, 
             (SUM(pkt_hps)/1000000) AS t_hps  
         ");
-        $this->pg_db->from("narno_pl_semua");
+        $this->pg_db->from("sip.narno_pl_semua");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -108,7 +108,7 @@ class Nontendering_paketopd_model extends CI_Model {
             COUNT(lls_id) AS t_paket, 
             (SUM(pkt_hps)/1000000) AS t_hps  
         ");
-        $this->pg_db->from("narno_pl_semua");
+        $this->pg_db->from("sip.narno_pl_semua");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -150,8 +150,8 @@ class Nontendering_paketopd_model extends CI_Model {
                 100
             ) as pro
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -193,8 +193,8 @@ class Nontendering_paketopd_model extends CI_Model {
                 100
             ) as pro
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }

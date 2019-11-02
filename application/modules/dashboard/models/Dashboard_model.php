@@ -18,7 +18,7 @@ class Dashboard_model extends CI_Model {
 
     public function get_repo(){
         $this->pg_db->select("cfg_value");
-        $this->pg_db->from("configuration");
+        $this->pg_db->from("public.configuration");
         $this->pg_db->where("cfg_sub_category", "ppe.id");
         $result = $this->pg_db->get();
         $data = '';
@@ -75,8 +75,8 @@ class Dashboard_model extends CI_Model {
     		(SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi/1000000000 ELSE a.pkt_pagu/1000000000 END) - b.harga_terkoreksi/1000000000)) AS selisih,
     		((SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) / SUM(CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) * 100 )) AS ttl_pros
     	");
-    	$this->pg_db->from("narno_semua a");
-    	$this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+    	$this->pg_db->from("sip.narno_semua a");
+    	$this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -87,11 +87,11 @@ class Dashboard_model extends CI_Model {
     public function paket_sirup(){
     	$this->local_db->select("
     		nama_satker, 
-    		SUM(total_pagu) AS total_pagu, 
+    		SUM(total_pagu::numeric) AS total_pagu, 
     		SUM(CASE WHEN motode_str = 'Tender' THEN 1 ELSE 0 END) AS jml_tender,
     		SUM(CASE WHEN motode_str = 'Seleksi' THEN 1 ELSE 0 END) AS jml_seleksi
     	");
-    	$this->local_db->from("tbl_pkt_penyedia");
+    	$this->local_db->from("sip.tbl_pkt_penyedia");
     	$this->local_db->WHERE("motode_str IN('tender','seleksi')");
     	$this->local_db->group_by("nama_satker");
     	$data = $this->local_db->get();
@@ -106,7 +106,7 @@ class Dashboard_model extends CI_Model {
 		  	COUNT(CASE WHEN motode_str = 'Tender' THEN motode_str END) AS tender,
 		  	COUNT(CASE WHEN motode_str = 'Seleksi' THEN motode_str END) AS seleksi
     	");
-    	$this->local_db->from("tbl_pkt_penyedia");
+    	$this->local_db->from("sip.tbl_pkt_penyedia");
     	$this->local_db->group_by("motode_str");
     	$data = $this->local_db->get();
     	return $data;
@@ -114,7 +114,7 @@ class Dashboard_model extends CI_Model {
 
     public function paket_swakelola(){
         $this->local_db->select("DISTINCT (nama_satker) AS nama_satker, (SUM(total_pagu)/1000000000) as pagu");
-        $this->local_db->from("tbl_pkt_penyedia");
+        $this->local_db->from("sip.tbl_pkt_penyedia");
         $this->local_db->group_by("nama_satker");
         $data = $this->local_db->get();
         return $data;
@@ -122,7 +122,7 @@ class Dashboard_model extends CI_Model {
 
     public function metode_tender_seleksi($tahun){
         $this->pg_db->select("metode, COUNT(tahun) AS jml_paket");
-        $this->pg_db->from("narno_semua");
+        $this->pg_db->from("sip.narno_semua");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -139,8 +139,8 @@ class Dashboard_model extends CI_Model {
             (SUM(b.harga_terkoreksi) / 1000000000) AS penawaran,
             (SUM(a.pkt_hps) / 1000000000) AS pg_paket
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         $this->pg_db->where("b.harga_terkoreksi >", 0);
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
@@ -158,8 +158,8 @@ class Dashboard_model extends CI_Model {
             (SUM(b.harga_terkoreksi)/1000000) as kontrak,
             (SUM((CASE WHEN a.pkt_hps = 0 THEN b.harga_terkoreksi ELSE a.pkt_hps END) - b.harga_terkoreksi)/1000000) AS efisiensi
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -174,7 +174,7 @@ class Dashboard_model extends CI_Model {
             versi_lelang,
             (CASE WHEN versi_lelang = 'SPSE4'::text THEN count(versi_lelang) ELSE COUNT(versi_lelang) END) AS jml_spse4
         ");
-        $this->pg_db->from("narno_semua");
+        $this->pg_db->from("sip.narno_semua");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -189,8 +189,8 @@ class Dashboard_model extends CI_Model {
             COUNT(a.lls_id) AS t_paket,
             count(b.lls_id) AS t_paket_selesai
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -206,8 +206,8 @@ class Dashboard_model extends CI_Model {
             COUNT(a.lls_id) as jml_paket,
             COUNT(b.rkn_nama) as jml_paket_selesai
         ");
-        $this->pg_db->from("narno_pl_semua a");
-        $this->pg_db->join("narno_pl_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_pl_semua a");
+        $this->pg_db->join("sip.narno_pl_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -219,7 +219,7 @@ class Dashboard_model extends CI_Model {
 
     public function pelaksanaan_pbj_lelang_ulang($tahun){
         $this->pg_db->select("tahun, COUNT(pkt_nama) as jumlah_paket");
-        $this->pg_db->from("status_lelang");
+        $this->pg_db->from("sip.status_lelang");
         $this->pg_db->where("lls_diulang_karena IS NOT NULL");
         $this->pg_db->where("lls_versi_lelang >", 1);
         $this->pg_db->where("lls_status", 1);
@@ -234,7 +234,7 @@ class Dashboard_model extends CI_Model {
 
     public function pelaksanaan_pbj_lelang_gagal($tahun){
         $this->pg_db->select("tahun, COUNT(pkt_nama) as jumlah_paket");
-        $this->pg_db->from("status_lelang");
+        $this->pg_db->from("sip.status_lelang");
         $this->pg_db->where("lls_diulang_karena IS NOT NULL");
         $this->pg_db->where("lls_versi_lelang >", 1);
         $this->pg_db->where("lls_status", 2);
@@ -315,7 +315,7 @@ class Dashboard_model extends CI_Model {
             COUNT(CASE WHEN kualifikasi = 'Gabungan' THEN kode_kualifikasi END) AS gab,
             COUNT(CASE WHEN kualifikasi = 'Belum Pilih Kualifikasi' THEN kode_kualifikasi END) AS blm
         ");
-        $this->pg_db->from("narno_kualifikasi");
+        $this->pg_db->from("sip.narno_kualifikasi");
         $this->pg_db->where("prp_id", $id_provinsi);
         $this->pg_db->order_by("cv", "DESC");
         $this->pg_db->group_by("kbp_nama");
@@ -333,7 +333,7 @@ class Dashboard_model extends CI_Model {
             COUNT(CASE WHEN kualifikasi = 'Gabungan' THEN kode_kualifikasi END) AS gab,
             COUNT(CASE WHEN kualifikasi = 'Belum Pilih Kualifikasi' THEN kode_kualifikasi END) AS blm
         ");
-        $this->pg_db->from("narno_kualifikasi");
+        $this->pg_db->from("sip.narno_kualifikasi");
         $this->pg_db->where("repo_id", $id_repo);
         $this->pg_db->where("kbp_id", $id_kabupaten);
         $this->pg_db->group_by("kbp_nama");
@@ -346,7 +346,7 @@ class Dashboard_model extends CI_Model {
             rkn_nama,
             COUNT(lls_id) as jml_paket 
         ");
-        $this->pg_db->from("narno_pl_menang");
+        $this->pg_db->from("sip.narno_pl_menang");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -362,7 +362,7 @@ class Dashboard_model extends CI_Model {
             rkn_nama,
             COUNT(lls_id) as jml_paket 
         ");
-        $this->pg_db->from("narno_menang");
+        $this->pg_db->from("sip.narno_menang");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -387,7 +387,7 @@ class Dashboard_model extends CI_Model {
             COUNT(mtd_pemilihan) AS jml_paket,
             (SUM(pkt_hps)/1000000000) AS jml_hps
         ");
-        $this->pg_db->from("narno_semua");
+        $this->pg_db->from("sip.narno_semua");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }

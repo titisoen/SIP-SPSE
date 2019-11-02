@@ -88,8 +88,8 @@ class Tendering_paketpengadaan_model extends CI_Model {
             ((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) AS efisiensi,  
             (((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) / (CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) * 100) AS prosentase
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -108,8 +108,8 @@ class Tendering_paketpengadaan_model extends CI_Model {
             SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) AS efisiensi,  
             (SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) / SUM(CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) * 100 ) AS prosentase
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -170,11 +170,11 @@ class Tendering_paketpengadaan_model extends CI_Model {
             c.jml_peserta,
             d.jml_rkn_nawar
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
-        $this->pg_db->join("narno_peserta c", "a.lls_id = c.lls_id");
-        $this->pg_db->join("narno_nawar d", "a.lls_id = d.lls_id");
-        $this->pg_db->join("narno_rup e", "a.lls_id = e.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->join("sip.narno_peserta c", "a.lls_id = c.lls_id");
+        $this->pg_db->join("sip.narno_nawar d", "a.lls_id = d.lls_id");
+        $this->pg_db->join("sip.narno_rup e", "a.lls_id = e.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -206,8 +206,8 @@ class Tendering_paketpengadaan_model extends CI_Model {
             b.kategori,
             b.sbd_id
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_rekap b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_rekap b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("b.tahun", $tahun+0);
         }

@@ -83,8 +83,8 @@ class Tendering_eprocurement_model extends CI_Model {
             (SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi/1000000000 ELSE a.pkt_pagu/1000000000 END) - b.harga_terkoreksi/1000000000)) AS selisih,
             ((SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) / SUM(CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) * 100 )) AS ttl_pros
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -107,8 +107,8 @@ class Tendering_eprocurement_model extends CI_Model {
             SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) AS selisih,  
             (SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) / SUM(CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) * 100 ) AS ttl_pros
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -132,8 +132,8 @@ class Tendering_eprocurement_model extends CI_Model {
             SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) AS selisih,  
             (SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) / SUM(CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) * 100 ) AS ttl_pros
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -154,8 +154,8 @@ class Tendering_eprocurement_model extends CI_Model {
             (COUNT(a.lls_id) - COUNT(b.rkn_nama) ) AS belum_selesai,
             SUM(b.harga_terkoreksi) AS t_tawar
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -176,8 +176,8 @@ class Tendering_eprocurement_model extends CI_Model {
             (COUNT(a.lls_id) - COUNT(b.rkn_nama) ) AS belum_selesai,
             SUM(b.harga_terkoreksi) AS t_tawar
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -257,7 +257,7 @@ class Tendering_eprocurement_model extends CI_Model {
                 END
             ) AS pagu_total
         ");
-        $this->pg_db->from("narno_semua");
+        $this->pg_db->from("sip.narno_semua");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -330,7 +330,7 @@ class Tendering_eprocurement_model extends CI_Model {
                 END
             ) AS pagu_total
         ");
-        $this->pg_db->from("narno_semua");
+        $this->pg_db->from("sip.narno_semua");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -354,8 +354,8 @@ class Tendering_eprocurement_model extends CI_Model {
             SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) AS selisih,  
             (SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) / SUM(CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) *100 ) AS t_pros
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -380,8 +380,8 @@ class Tendering_eprocurement_model extends CI_Model {
             SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) AS selisih,  
             (SUM((CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) - b.harga_terkoreksi) / SUM(CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) *100 ) AS t_pros
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -409,7 +409,7 @@ class Tendering_eprocurement_model extends CI_Model {
             SUM((CASE WHEN pkt_pagu = 0 THEN harga_terkoreksi ELSE pkt_pagu END) - harga_terkoreksi) AS efisiensi,  
             (SUM((CASE WHEN pkt_pagu = 0 THEN harga_terkoreksi ELSE pkt_pagu END) - harga_terkoreksi) / SUM(CASE WHEN pkt_pagu = 0 THEN harga_terkoreksi ELSE pkt_pagu END) *100 ) AS pro
         ");
-        $this->pg_db->from("narno_menang");
+        $this->pg_db->from("sip.narno_menang");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -433,7 +433,7 @@ class Tendering_eprocurement_model extends CI_Model {
             SUM((CASE WHEN pkt_pagu = 0 THEN harga_terkoreksi ELSE pkt_pagu END) - harga_terkoreksi) AS efisiensi,  
             (SUM((CASE WHEN pkt_pagu = 0 THEN harga_terkoreksi ELSE pkt_pagu END) - harga_terkoreksi) / SUM(CASE WHEN pkt_pagu = 0 THEN harga_terkoreksi ELSE pkt_pagu END) *100 ) AS pro
         ");
-        $this->pg_db->from("narno_menang");
+        $this->pg_db->from("sip.narno_menang");
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
         }
@@ -460,8 +460,8 @@ class Tendering_eprocurement_model extends CI_Model {
                 SUM(CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) *100
             ) AS t_pros
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -489,8 +489,8 @@ class Tendering_eprocurement_model extends CI_Model {
                 SUM(CASE WHEN a.pkt_pagu = 0 THEN b.harga_terkoreksi ELSE a.pkt_pagu END) *100
             ) AS t_pros
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
@@ -504,7 +504,7 @@ class Tendering_eprocurement_model extends CI_Model {
 
     public function top_ten_tender_barang($tahun, $satker){
         $this->pg_db->select("rkn_nama, kbp_nama, COUNT(lls_id) AS paket, (SUM(harga_terkoreksi)/1000000000) AS penawaran");
-        $this->pg_db->from("narno_menang");
+        $this->pg_db->from("sip.narno_menang");
         $this->pg_db->where("kgr_id", 0);
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
@@ -521,7 +521,7 @@ class Tendering_eprocurement_model extends CI_Model {
 
     public function top_ten_tender_konsultasi($tahun, $satker){
         $this->pg_db->select("rkn_nama, kbp_nama, COUNT(lls_id) AS paket, (SUM(harga_terkoreksi)/1000000000) AS penawaran");
-        $this->pg_db->from("narno_menang");
+        $this->pg_db->from("sip.narno_menang");
         $this->pg_db->where("kgr_id", 1);
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
@@ -538,7 +538,7 @@ class Tendering_eprocurement_model extends CI_Model {
 
     public function top_ten_tender_konstruksi($tahun, $satker){
         $this->pg_db->select("rkn_nama, kbp_nama, COUNT(lls_id) AS paket, (SUM(harga_terkoreksi)/1000000000) AS penawaran");
-        $this->pg_db->from("narno_menang");
+        $this->pg_db->from("sip.narno_menang");
         $this->pg_db->where("kgr_id", 2);
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
@@ -555,7 +555,7 @@ class Tendering_eprocurement_model extends CI_Model {
 
     public function top_ten_nontender_barang($tahun, $satker){
         $this->pg_db->select("rkn_nama, kbp_nama, COUNT(lls_id) AS paket, (SUM(harga_terkoreksi)/1000000) AS penawaran");
-        $this->pg_db->from("narno_pl_menang");
+        $this->pg_db->from("sip.narno_pl_menang");
         $this->pg_db->where("kgr_id", 0);
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
@@ -569,7 +569,7 @@ class Tendering_eprocurement_model extends CI_Model {
 
     public function top_ten_nontender_konsultasi($tahun, $satker){
         $this->pg_db->select("rkn_nama, kbp_nama, COUNT(lls_id) AS paket, (SUM(harga_terkoreksi)/1000000) AS penawaran");
-        $this->pg_db->from("narno_pl_menang");
+        $this->pg_db->from("sip.narno_pl_menang");
         $this->pg_db->where("kgr_id", 1);
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);
@@ -583,7 +583,7 @@ class Tendering_eprocurement_model extends CI_Model {
 
     public function top_ten_nontender_konstruksi($tahun, $satker){
         $this->pg_db->select("rkn_nama, kbp_nama, COUNT(lls_id) AS paket, (SUM(harga_terkoreksi)/1000000000) AS penawaran");
-        $this->pg_db->from("narno_pl_menang");
+        $this->pg_db->from("sip.narno_pl_menang");
         $this->pg_db->where("kgr_id", 2);
         if ($tahun != 'all') {
             $this->pg_db->where("tahun", $tahun+0);

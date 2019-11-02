@@ -13,7 +13,7 @@ class Main_model extends CI_Model {
 
     public function get_all_data_kontak_kami(){
         $this->local_db->select("*");
-        $this->local_db->from("tbl_misc");
+        $this->local_db->from("sip.tbl_misc");
         $this->local_db->where("slug", "kontak_kami");
         $data = $this->local_db->get();
         return $data;
@@ -22,7 +22,7 @@ class Main_model extends CI_Model {
 
     public function get_all_data_info_privasi(){
         $this->local_db->select("*");
-        $this->local_db->from("tbl_misc");
+        $this->local_db->from("sip.tbl_misc");
         $this->local_db->where("slug", "info_privasi");
         $data = $this->local_db->get();
         return $data;

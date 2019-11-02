@@ -61,7 +61,7 @@ AND lls.lls_status = 1::numeric
 AND stk.stk_id = pnt.stk_id 
 AND pnt.pnt_id = pkt.pnt_id
 ORDER BY (date_part('year'::text, pkt.pkt_tgl_buat)) DESC;
-ALTER TABLE narno_semua OWNER TO postgres;
+ALTER TABLE narno_semua OWNER TO epns;
 
 -- TABEL VIEW narno_menang 02 --
 
@@ -151,7 +151,7 @@ AND (eva.eva_id IN ( SELECT evaluasi_1.eva_id
    ORDER BY evaluasi_1.lls_id)) AND eva.eva_jenis = 4::numeric AND lls.lls_status = 1::numeric AND nev.nev_lulus = 1::numeric
 ORDER BY lls.lls_id DESC;
 ALTER TABLE narno_menang
-OWNER TO postgres;
+OWNER TO epns;
 
 -- TABEL VIEW narno_rup 03 --
 
@@ -172,7 +172,7 @@ CREATE OR REPLACE VIEW public.narno_rup AS
   ORDER BY (date_part('year'::text, pkt.pkt_tgl_buat)) DESC;
 
 ALTER TABLE public.narno_rup
-    OWNER TO postgres;
+    OWNER TO epns;
 
 -- TABEL VIEW rasio_rkn_daftar 04 --
 
@@ -183,7 +183,7 @@ FROM peserta a
 LEFT JOIN rekanan b ON a.rkn_id = b.rkn_id
 GROUP BY b.rkn_nama
 ORDER BY count(b.rkn_id) DESC;
-ALTER TABLE public.rasio_rkn_daftar OWNER TO postgres;
+ALTER TABLE public.rasio_rkn_daftar OWNER TO epns;
 
 -- TABEL VIEW rasio_rkn_nawar 05 --
 
@@ -199,7 +199,7 @@ AND dok_penawaran.psr_id = peserta.psr_id
 AND dok_penawaran.dok_disclaim = 1::numeric
 GROUP BY peserta.rkn_id, rekanan.rkn_nama
 ORDER BY count(dok_penawaran.dok_id) DESC;
-ALTER TABLE public.rasio_rkn_nawar OWNER TO postgres;
+ALTER TABLE public.rasio_rkn_nawar OWNER TO epns;
 
 -- TABEL VIEW rasio_rkn_daftar_nawar 06 --
 
@@ -209,7 +209,7 @@ a.daftar,
 b.tawar
 FROM rasio_rkn_daftar a
 LEFT JOIN rasio_rkn_nawar b ON a.rkn_nama = b.rkn_nama;
-ALTER TABLE public.rasio_rkn_daftar_nawar OWNER TO postgres;
+ALTER TABLE public.rasio_rkn_daftar_nawar OWNER TO epns;
 
 -- TABEL VIEW rasio_rkn_menang 07 --
 
@@ -219,7 +219,7 @@ count(narno_menang.rkn_nama) AS menang
 FROM narno_menang
 GROUP BY narno_menang.rkn_nama
 ORDER BY count(narno_menang.rkn_nama) DESC;
-ALTER TABLE public.rasio_rkn_menang OWNER TO postgres;
+ALTER TABLE public.rasio_rkn_menang OWNER TO epns;
 
 -- TABEL VIEW status_lelang 08 --
 
@@ -276,7 +276,7 @@ AND lls.lls_status > 0::numeric
 AND stk.stk_id = pnt.stk_id 
 AND pnt.pnt_id = pkt.pnt_id
 ORDER BY (date_part('year'::text, pkt.pkt_tgl_buat)) DESC;
-ALTER TABLE status_lelang OWNER TO postgres;
+ALTER TABLE status_lelang OWNER TO epns;
 
 -- TABEL VIEW narno_peserta 09 --
 
@@ -287,7 +287,7 @@ FROM peserta p,
 lelang_seleksi l
 WHERE l.lls_id = p.lls_id
 GROUP BY l.lls_id;
-ALTER TABLE public.narno_peserta OWNER TO postgres;
+ALTER TABLE public.narno_peserta OWNER TO epns;
 
 -- TABEL VIEW narno_dokpen 10 --
 
@@ -299,7 +299,7 @@ WHERE (a.dok_jenis = 2::numeric OR a.dok_jenis = 3::numeric)
 AND a.dok_disclaim = 1::numeric
 GROUP BY a.psr_id
 ORDER BY a.psr_id DESC;
-ALTER TABLE public.narno_dokpen OWNER TO postgres;
+ALTER TABLE public.narno_dokpen OWNER TO epns;
 
 -- TABEL VIEW narno_nawar 11 --
 
@@ -312,7 +312,7 @@ narno_dokpen d
 WHERE l.lls_id = p.lls_id AND d.psr_id = p.psr_id
 GROUP BY l.lls_id
 ORDER BY l.lls_id DESC;
-ALTER TABLE public.narno_nawar OWNER TO postgres;
+ALTER TABLE public.narno_nawar OWNER TO epns;
 
 -- TABEL VIEW narno_kualifikasi 12 --
 
@@ -349,6 +349,7 @@ WHERE r.rkn_status_verifikasi::text = '1111111'::text OR r.rkn_status_verifikasi
 GROUP BY r.rkn_nama, 
 i.kls_id, 
 r.rkn_id, 
+date_part('year'::text, r.rkn_tgl_daftar),
 b.btu_nama, 
 r.btu_id, 
 r.rkn_status_verifikasi, 
@@ -358,7 +359,7 @@ k.kbp_id,
 k.kbp_nama, 
 r.repo_id
 ORDER BY r.rkn_nama;
-ALTER TABLE public.narno_kualifikasi OWNER TO postgres;
+ALTER TABLE public.narno_kualifikasi OWNER TO epns;
 
 -- TABEL VIEW narno_rekap 13 --
 
@@ -434,7 +435,7 @@ AND j.pkt_id = d.pkt_id
 AND j.ang_id = i.ang_id 
 AND a.psr_harga > 0::numeric
 ORDER BY c.lls_id DESC, a.psr_harga;
-ALTER TABLE public.narno_rekap OWNER TO postgres;
+ALTER TABLE public.narno_rekap OWNER TO epns;
 
 -- TABEL VIEW narno_pl_semua 14 --
 
@@ -473,7 +474,7 @@ CREATE OR REPLACE VIEW public.narno_pl_semua AS
     satuan_kerja stk
   WHERE lls.pkt_id = pkt.pkt_id AND ps.pkt_id = pkt.pkt_id AND lls.lls_status = 1::numeric AND stk.stk_id = ps.stk_id
   ORDER BY (date_part('year'::text, pkt.pkt_tgl_buat)) DESC;
-ALTER TABLE narno_pl_semua OWNER TO postgres;
+ALTER TABLE narno_pl_semua OWNER TO epns;
 
 -- TABEL VIEW narno_pl_menang 15 --
 
@@ -578,7 +579,7 @@ nev.nev_harga,
     ELSE nev.nev_harga
     END), pkt.pkt_nama
 ORDER BY lls.lls_id DESC;
-ALTER TABLE narno_pl_menang OWNER TO postgres;
+ALTER TABLE narno_pl_menang OWNER TO epns;
 
 -- TABEL VIEW narno_pl_rup 16 --
 
@@ -594,7 +595,7 @@ CREATE OR REPLACE VIEW public.narno_pl_rup AS
     ekontrak.paket_satker ps
   WHERE ps.pkt_id = pkt.pkt_id AND lls.pkt_id = pkt.pkt_id AND lls.lls_status = 1::numeric;
 
-ALTER TABLE public.narno_pl_rup OWNER TO postgres;
+ALTER TABLE public.narno_pl_rup OWNER TO epns;
 
 -- TABEL VIEW narno_rekanan 17 --
 
@@ -610,7 +611,7 @@ date_part('year'::text, r.rkn_tgl_daftar) AS tahun,
 r.kota
 FROM rekanan r
 ORDER BY r.rkn_nama;
-ALTER TABLE public.narno_rekanan OWNER TO postgres;
+ALTER TABLE public.narno_rekanan OWNER TO epns;
 
 
 

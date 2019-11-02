@@ -66,7 +66,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
 
     public function get_total_pagu_apbd($tahun){
         $this->local_db->select("SUM(btl) AS btl, SUM(bl) AS bl");
-        $this->local_db->from("rekap_apbd");
+        $this->local_db->from("sip.rekap_apbd");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun);
         }
@@ -80,7 +80,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
 
     public function get_total_opd($tahun){
         $this->local_db->select("COUNT(id_satker) AS total_opd");
-        $this->local_db->from("rekap_apbd");
+        $this->local_db->from("sip.rekap_apbd");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun);
         }
@@ -108,14 +108,14 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(CASE WHEN motode_str = 'Seleksi' THEN motode_str END) AS seleksi,
             COUNT(CASE WHEN motode_str = 'Penunjukan Langsung' THEN motode_str END) AS penunjukan_langsung,
             COUNT(CASE WHEN motode_str = 'e-Purchasing' THEN motode_str END) AS e_purchasing,
-            SUM(CASE WHEN motode_str =  'Pengadaan Langsung' THEN total_pagu END) AS pg_pl, 
-            SUM(CASE WHEN motode_str =  'Tender Cepat' THEN total_pagu END) AS pg_tc, 
-            SUM(CASE WHEN motode_str =  'Tender' THEN total_pagu END) AS pg_t, 
-            SUM(CASE WHEN motode_str =  'Seleksi' THEN total_pagu END) AS pg_sl, 
-            SUM(CASE WHEN motode_str =  'Penunjukan Langsung' THEN total_pagu END) AS pg_plg, 
-            SUM(CASE WHEN motode_str =  'e-Purchasing' THEN total_pagu END) AS pg_ep
+            SUM(CASE WHEN motode_str =  'Pengadaan Langsung' THEN total_pagu::numeric END) AS pg_pl, 
+            SUM(CASE WHEN motode_str =  'Tender Cepat' THEN total_pagu::numeric END) AS pg_tc, 
+            SUM(CASE WHEN motode_str =  'Tender' THEN total_pagu::numeric END) AS pg_t, 
+            SUM(CASE WHEN motode_str =  'Seleksi' THEN total_pagu::numeric END) AS pg_sl, 
+            SUM(CASE WHEN motode_str =  'Penunjukan Langsung' THEN total_pagu::numeric END) AS pg_plg, 
+            SUM(CASE WHEN motode_str =  'e-Purchasing' THEN total_pagu::numeric END) AS pg_ep
         ");
-        $this->local_db->from("tbl_pkt_penyedia");
+        $this->local_db->from("sip.tbl_pkt_penyedia");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -129,9 +129,9 @@ class Sirup_rekapitulasi_model extends CI_Model {
             nama_satker,
             btl AS btl,
             bl AS bl,
-            (btl + bl) AS jml_pagu
+            (btl::numeric + bl::numeric) AS jml_pagu
         ");
-        $this->local_db->from("rekap_apbd");
+        $this->local_db->from("sip.rekap_apbd");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -145,11 +145,11 @@ class Sirup_rekapitulasi_model extends CI_Model {
 
     public function total_perencanaan_belanja_pemda($tahun){
         $this->local_db->select("
-            SUM(btl) AS btl,
-            SUM(bl) AS bl,
-            (SUM(btl) + SUM(bl)) AS jml_pagu
+            SUM(btl::numeric) AS btl,
+            SUM(bl::numeric) AS bl,
+            (SUM(btl::numeric) + SUM(bl::numeric)) AS jml_pagu
         ");
-        $this->local_db->from("rekap_apbd");
+        $this->local_db->from("sip.rekap_apbd");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -162,19 +162,19 @@ class Sirup_rekapitulasi_model extends CI_Model {
             a.id_satker, 
             a.nama_satker, 
             a.bl AS bl,
-            IF(b.jml_pagu > 0, b.jml_pagu,0) AS pg_sudah_penyedia, 
-            IF(c.jml_pagu > 0, c.jml_pagu,0) AS pg_belum_penyedia, 
-            IF(d.jml_pagu > 0, d.jml_pagu,0) AS pg_sudah_swakelola,
-            IF(e.jml_pagu > 0, e.jml_pagu,0) AS pg_belum_swakelola, 
-            (IF(b.jml_pagu > 0, b.jml_pagu,0) + if(d.jml_pagu > 0, d.jml_pagu,0)) AS pg_rup_tayang,
-            (a.bl - (IF(b.jml_pagu > 0, b.jml_pagu, 0) + IF(d.jml_pagu > 0, d.jml_pagu,0))) AS pg_selisih_rup_tayang 
+            IF(b.jml_pagu::numeric > 0, b.jml_pagu,0) AS pg_sudah_penyedia, 
+            IF(c.jml_pagu::numeric > 0, c.jml_pagu,0) AS pg_belum_penyedia, 
+            IF(d.jml_pagu::numeric > 0, d.jml_pagu,0) AS pg_sudah_swakelola,
+            IF(e.jml_pagu::numeric > 0, e.jml_pagu,0) AS pg_belum_swakelola, 
+            (IF(b.jml_pagu::numeric > 0, b.jml_pagu,0) + if(d.jml_pagu::numeric > 0, d.jml_pagu::numeric,0)) AS pg_rup_tayang,
+            (a.bl::numeric - (IF(b.jml_pagu::numeric > 0, b.jml_pagu::numeric, 0) + IF(d.jml_pagu::numeric > 0, d.jml_pagu::numeric,0))) AS pg_selisih_rup_tayang 
         ");
-        $this->local_db->from("rekap_apbd a");
-        $this->local_db->join("rekap_penyedia b", "a.id_satker = b.id_satker");
-        $this->local_db->join("rekap_swakelola c", "a.id_satker = c.id_satker");
-        $this->local_db->join("rekap_penyedia_belum d", "a.id_satker = d.id_satker");
-        $this->local_db->join("rekap_swakelola_belum e", "a.id_satker = e.id_satker");
-        $this->local_db->where("a.bl >", 0);
+        $this->local_db->from("sip.rekap_apbd a");
+        $this->local_db->join("sip.rekap_penyedia b", "a.id_satkera::text = b.id_satker");
+        $this->local_db->join("sip.rekap_swakelola c", "a.id_satker::text = c.id_satker");
+        $this->local_db->join("sip.rekap_penyedia_belum d", "a.id_satker::text = d.id_satker::text");
+        $this->local_db->join("sip.rekap_swakelola_belum e", "a.id_satker::text = e.id_satker::text");
+        $this->local_db->where("a.bl::numeric >", 0);
         if ($tahun != 'all') {
             $this->local_db->where("a.tahun", $tahun+0);
         }
@@ -194,11 +194,11 @@ class Sirup_rekapitulasi_model extends CI_Model {
             (IF(b.jml_pagu > 0, b.jml_pagu,0) + if(d.jml_pagu > 0, d.jml_pagu,0)) AS pg_rup_tayang,
             (a.bl - (IF(b.jml_pagu > 0, b.jml_pagu, 0) + IF(d.jml_pagu > 0, d.jml_pagu,0))) AS pg_selisih_rup_tayang 
         ");
-        $this->local_db->from("rekap_apbd a");
-        $this->local_db->join("rekap_penyedia b", "a.id_satker = b.id_satker");
-        $this->local_db->join("rekap_swakelola c", "a.id_satker = c.id_satker");
-        $this->local_db->join("rekap_penyedia_belum d", "a.id_satker = d.id_satker");
-        $this->local_db->join("rekap_swakelola_belum e", "a.id_satker = e.id_satker");
+        $this->local_db->from("sip.rekap_apbd a");
+        $this->local_db->join("sip.rekap_penyedia b", "a.id_satker = b.id_satker");
+        $this->local_db->join("sip.rekap_swakelola c", "a.id_satker = c.id_satker");
+        $this->local_db->join("sip.rekap_penyedia_belum d", "a.id_satker = d.id_satker");
+        $this->local_db->join("sip.rekap_swakelola_belum e", "a.id_satker = e.id_satker");
         $this->local_db->where("a.bl >", 0);
         if ($tahun != 'all') {
             $this->local_db->where("a.tahun", $tahun+0);
@@ -224,7 +224,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jumlah_paket,
             (SUM(total_pagu)/1000000) AS total_pagu
         ");
-        $this->local_db->from("tbl_pkt_penyedia");
+        $this->local_db->from("sip.tbl_pkt_penyedia");
         if ($tahun != 'all') {
             $this->db->where("tahun", $tahun+0);
         }
@@ -250,8 +250,8 @@ class Sirup_rekapitulasi_model extends CI_Model {
             b.pg_swa,
             b.pkt_swa
         ");
-        $this->local_db->from("rekap_penyedia_tepra a");
-        $this->local_db->join("rekap_swakelola_tepra b", "a.tahun = b.tahun");
+        $this->local_db->from("sip.rekap_penyedia_tepra a");
+        $this->local_db->join("sip.rekap_swakelola_tepra b", "a.tahun = b.tahun");
         if ($tahun != 'all') {
             $this->local_db->where("a.tahun", $tahun+0);
         }
@@ -264,11 +264,11 @@ class Sirup_rekapitulasi_model extends CI_Model {
             (((SUM(IF(b.jml_pagu > 0, b.jml_pagu,0)) + SUM(IF(d.jml_pagu > 0, d.jml_pagu,0)))/SUM(a.bl)) * 100) AS pro_pagu,
             (((SUM(IF(b.jml_pagu > 0, b.jml_pagu,0)) + SUM(IF(d.jml_pagu > 0, d.jml_pagu,0)))/SUM(a.bl)) * 100) AS pro1_pagu 
         ");
-        $this->local_db->from("rekap_apbd a");
-        $this->local_db->join("rekap_penyedia b", "a.id_satker = b.id_satker");
-        $this->local_db->join("rekap_swakelola c", "a.id_satker = c.id_satker");
-        $this->local_db->join("rekap_penyedia_belum d", "a.id_satker = d.id_satker");
-        $this->local_db->join("rekap_swakelola_belum e", "a.id_satker = e.id_satker");
+        $this->local_db->from("sip.rekap_apbd a");
+        $this->local_db->join("sip.rekap_penyedia b", "a.id_satker = b.id_satker");
+        $this->local_db->join("sip.rekap_swakelola c", "a.id_satker = c.id_satker");
+        $this->local_db->join("sip.rekap_penyedia_belum d", "a.id_satker = d.id_satker");
+        $this->local_db->join("sip.rekap_swakelola_belum e", "a.id_satker = e.id_satker");
         if ($tahun != 'all') {
             $this->local_db->where("a.tahun", $tahun+0);
         }
@@ -282,7 +282,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jml_paket, 
             SUM(total_pagu) AS jml_pagu 
         ");
-        $this->local_db->from("tbl_pkt_penyedia");
+        $this->local_db->from("sip.tbl_pkt_penyedia");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -296,7 +296,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jml_paket, 
             SUM(total_pagu) AS jml_pagu 
         ");
-        $this->local_db->from("tbl_pkt_penyedia");
+        $this->local_db->from("sip.tbl_pkt_penyedia");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -311,7 +311,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jml_paket, 
             SUM(total_pagu) AS jml_pagu 
         ");
-        $this->local_db->from("tbl_pkt_penyedia_belum");
+        $this->local_db->from("sip.tbl_pkt_penyedia_belum");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -326,7 +326,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jml_paket, 
             SUM(total_pagu) AS jml_pagu 
         ");
-        $this->local_db->from("tbl_pkt_penyedia_belum");
+        $this->local_db->from("sip.tbl_pkt_penyedia_belum");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -340,7 +340,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jml_paket, 
             SUM(total_pagu) AS jml_pagu 
         ");
-        $this->local_db->from("tbl_pkt_swakelola");
+        $this->local_db->from("sip.tbl_pkt_swakelola");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -354,7 +354,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jml_paket, 
             SUM(total_pagu) AS jml_pagu 
         ");
-        $this->local_db->from("tbl_pkt_swakelola");
+        $this->local_db->from("sip.tbl_pkt_swakelola");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -368,7 +368,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jml_paket, 
             SUM(total_pagu) AS jml_pagu 
         ");
-        $this->local_db->from("tbl_pkt_swakelola_belum");
+        $this->local_db->from("sip.tbl_pkt_swakelola_belum");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -382,7 +382,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jml_paket, 
             SUM(total_pagu) AS jml_pagu 
         ");
-        $this->local_db->from("tbl_pkt_swakelola_belum");
+        $this->local_db->from("sip.tbl_pkt_swakelola_belum");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -400,7 +400,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             (".$opd['total_opd']." - COUNT(DISTINCT(id_satker))) AS jml_opd_min, 
             ((SUM(total_pagu) / ".$pagu_apbd['pagu_bl'].") * 100) AS pro_pagu
         ");
-        $this->local_db->from("tbl_pkt_penyedia");
+        $this->local_db->from("sip.tbl_pkt_penyedia");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -420,7 +420,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             ((".$opd['total_opd']." - COUNT(DISTINCT(id_satker))) / ".$opd['total_opd']." * 100) AS pro_opd_min, 
             (COUNT(DISTINCT(id_satker)) / ".$opd['total_opd']." * 100) AS pro_opd
         ");
-        $this->local_db->from("tbl_pkt_penyedia_belum");
+        $this->local_db->from("sip.tbl_pkt_penyedia_belum");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -447,7 +447,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jumlah_paket,
             SUM(total_pagu/1000000000) AS total_pagu
         ");
-        $this->local_db->from("tbl_pkt_penyedia");
+        $this->local_db->from("sip.tbl_pkt_penyedia");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -474,7 +474,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jumlah_paket,
             SUM(total_pagu/1000000000) AS total_pagu
         ");
-        $this->local_db->from("tbl_pkt_penyedia");
+        $this->local_db->from("sip.tbl_pkt_penyedia");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -484,7 +484,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
 
     public function paket_penyedia_data_rup($tahun){
         $this->local_db->select("*");
-        $this->local_db->from("tbl_pkt_penyedia");
+        $this->local_db->from("sip.tbl_pkt_penyedia");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -503,7 +503,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             (".$opd['total_opd']." - COUNT(DISTINCT(id_satker))) AS jml_opd_min, 
             ((SUM(total_pagu) / ".$pagu_apbd['pagu_bl'].") * 100) AS pro_pagu
         ");
-        $this->local_db->from("tbl_pkt_swakelola");
+        $this->local_db->from("sip.tbl_pkt_swakelola");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -523,7 +523,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             ((".$opd['total_opd']." - COUNT(DISTINCT(id_satker))) / ".$opd['total_opd']." * 100) AS pro_opd_min, 
             (COUNT(DISTINCT(id_satker)) / ".$opd['total_opd']." * 100) AS pro_opd
         ");
-        $this->local_db->from("tbl_pkt_swakelola_belum");
+        $this->local_db->from("sip.tbl_pkt_swakelola_belum");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -538,7 +538,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jumlah_paket,
             SUM(total_pagu) AS total_pagu
         ");
-        $this->local_db->from("tbl_pkt_swakelola");
+        $this->local_db->from("sip.tbl_pkt_swakelola");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -552,7 +552,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
             COUNT(id) AS jumlah_paket,
             SUM(total_pagu) AS total_pagu
         ");
-        $this->local_db->from("tbl_pkt_swakelola");
+        $this->local_db->from("sip.tbl_pkt_swakelola");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }
@@ -562,7 +562,7 @@ class Sirup_rekapitulasi_model extends CI_Model {
 
     public function paket_swakelola_data_rup($tahun){
         $this->local_db->select("*");
-        $this->local_db->from("tbl_pkt_swakelola");
+        $this->local_db->from("sip.tbl_pkt_swakelola");
         if ($tahun != 'all') {
             $this->local_db->where("tahun", $tahun+0);
         }

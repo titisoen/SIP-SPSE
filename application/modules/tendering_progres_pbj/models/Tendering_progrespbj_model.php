@@ -58,7 +58,7 @@ class Tendering_progrespbj_model extends CI_Model {
 
     public function get_agency(){
         $this->pg_db->select("stk_id, stk_nama");
-        $this->pg_db->from("narno_semua");
+        $this->pg_db->from("sip.narno_semua");
         $this->pg_db->group_by("stk_id");
         $this->pg_db->group_by("stk_nama");
         $this->pg_db->order_by("stk_id", "DESC");
@@ -125,8 +125,8 @@ class Tendering_progrespbj_model extends CI_Model {
                 100
             ) AS prosentase
         ");
-        $this->pg_db->from("narno_semua a");
-        $this->pg_db->join("narno_menang b", "a.lls_id = b.lls_id");
+        $this->pg_db->from("sip.narno_semua a");
+        $this->pg_db->join("sip.narno_menang b", "a.lls_id = b.lls_id");
         if ($tahun != 'all') {
             $this->pg_db->where("a.tahun", $tahun+0);
         }
