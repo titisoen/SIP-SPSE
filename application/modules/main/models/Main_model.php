@@ -19,6 +19,10 @@ class Main_model extends CI_Model {
         return $data;
     }
 
+	public function get_info_klpd(){
+		$this->local_db->from("sip.danang_klpd");
+		return $this->local_db->get();
+	}
 
     public function get_all_data_info_privasi(){
         $this->local_db->select("*");

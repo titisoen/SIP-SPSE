@@ -28,6 +28,11 @@ class Autentikasi_model extends CI_Model {
         return $data;
     }
 
+	public function get_info_klpd(){
+		$this->local_db->from("sip.danang_klpd");
+		return $this->local_db->get();
+	}
+
 
     public function get_all_data_tbl_users_by_username($username){
         $this->local_db->select("*");

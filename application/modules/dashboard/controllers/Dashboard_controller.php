@@ -9,7 +9,8 @@ class Dashboard_controller extends CI_Controller {
 	}
 
 	public function main_page(){
-		$this->load->view('data');
+		$data['klpd'] = $this->model->get_info_klpd()->row()->nama_klpd;
+		$this->load->view('data', $data);
 	}
 
 	// *************************************************

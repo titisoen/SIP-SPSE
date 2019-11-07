@@ -16,6 +16,11 @@ class Dashboard_model extends CI_Model {
     // ||
     // ****************************************
 
+	public function get_info_klpd(){
+		$this->local_db->from("sip.danang_klpd");
+		return $this->local_db->get();
+	}
+
     public function get_repo(){
         $this->pg_db->select("cfg_value");
         $this->pg_db->from("public.configuration");

@@ -11,6 +11,12 @@
 </div>
 
 <script type="text/javascript">
+	var klpd;
+
+	$(function(){
+		klpd = $(".js-klpd").val();
+	});
+
     //**********************************************
     //*                                             
     //* GRAFIK PAKET TENDER/SELEKSI E-PROCUREMENT
@@ -71,7 +77,7 @@
             theme               : "light2",
             animationEnabled    : true,
             exportEnabled       : true,
-            title               : {text: "LPSE Kabupaten Ponorogo", fontSize: 20},
+            title               : {text: "LPSE "+klpd, fontSize: 20},
             axisX               : {interval: 1},
             axisY               : {valueFormatString: "###0"},
             toolTip             : {shared: true},

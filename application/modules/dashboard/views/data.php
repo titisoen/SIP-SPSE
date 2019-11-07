@@ -1,3 +1,5 @@
+<input type="hidden" class="js-klpd" value="<?=$klpd;?>"/>
+
 <div class="row">
     <?php
         include_once 'pencarian_data.php';

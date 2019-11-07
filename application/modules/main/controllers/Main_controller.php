@@ -49,7 +49,7 @@ class Main_controller extends CI_Controller {
 			}
 		}
 		$data["misc"] 	= array("nama_kota" => $nama_kota, "nama_admin" => $nama_admin, "url_admin" => $url_admin);
-
+		$data['klpd'] = $this->model->get_info_klpd()->row()->nama_klpd;
 		$this->load->view('Main_view', $data);
 	}
 }
