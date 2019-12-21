@@ -21,7 +21,7 @@ class Misc_tarikdata_model extends CI_Model {
 
     public function get_kode_sirup_klpd(){
         $this->local_db->from('sip.danang_klpd');
-				return $this->db->get()->row()->kode_klpd;
+				return $this->local_db->get()->row()->kode_klpd;
     }
 
 
