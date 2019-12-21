@@ -29,7 +29,7 @@ class Misc_tarikdata_controller extends CI_Controller {
 
 			}
 		}
-
+		$kode_sirup = $this->model->get_kode_sirup_klpd()? $this->model->get_kode_sirup_klpd() : $kode_sirup;
 		return $kode_sirup;
 	}
 
