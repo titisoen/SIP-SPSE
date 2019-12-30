@@ -12,7 +12,8 @@
                             <h4>JSON SiRUP</h4>
                             <select class="misc-tarikdata-json-sirup-tahun js-select2 form-control"style="width: 100%;">
                             <?php
-                                $date = date('Y', strtotime("-1 year"));
+                                //$date = date('Y', strtotime("-1 year"));
+                                $date = date('Y');
                                 for ($i=2013; $i <= $date ; $date--) {
                             ?>
                                   <option value="<?=$date?>">Tahun <?=$date?></option>
