@@ -74,7 +74,7 @@
           dataType  : 'JSON',
           success   : function(JSON){
             check_status_autentikasi_data();
-            location.href='../auth/page/login';
+            location.href='../app/main';
           },
           error     : function(jqXHR, textStatus, errorThrown){
             location.href='';
