@@ -267,9 +267,11 @@ class Misc_tarikdata_controller extends CI_Controller {
 	// *************************************************
 
 	public function json_sirup($tahun){
+		$kode_daerah	= $this->select_all_data_info_privasi();
 		$count = 0;
 		$this->model->delete_tbl_pkt_sirup($tahun);
-		$get_json = json_decode(file_get_contents('./assets/js/json/data'.$tahun.'.json'));
+			$get_json	= json_decode(file_get_contents('https://inaproc.lkpp.go.id/isb/api/08fdd093-4cb2-4549-8a00-d53c000880ef/json/13034705/pengumumanruptahunan/tipe/4:12/parameter/'.$tahun.':'.$kode_daerah));
+//		$get_json = json_decode(file_get_contents('./assets/js/json/data'.$tahun.'.json'));
 		foreach ($get_json as $rows) {
 			$data = array(
 								"tahun" 					=> $tahun,

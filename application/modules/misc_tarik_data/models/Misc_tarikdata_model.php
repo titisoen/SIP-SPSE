@@ -17,6 +17,16 @@ class Misc_tarikdata_model extends CI_Model {
         $this->local_db->where("slug", "info_privasi");
         $data = $this->local_db->get();
         return $data;
+				/* field: engine
+				a:1:{
+					i:0;a:4:{
+						s:9:	"nama_kota";		s:18:	"Kabupaten Ponorogo";
+						s:10:	"nama_admin";		s:23:	"LPSE Kabupaten Ponorogo";
+						s:9:	"url_admin";		s:33:	"https://lpse.ponorogo.go.id/eproc";
+						s:10:	"kode_sirup";		s:4:	"D196";
+					}
+				}
+				*/
     }
 
     public function get_kode_sirup_klpd(){
@@ -100,11 +110,11 @@ class Misc_tarikdata_model extends CI_Model {
     * --------------------------------- */
     public function delete_tbl_pkt_sirup($tahun){
         $this->local_db->where("tahun", $tahun);
-        $this->local_db->delete('tbl_pkt_sirup');
+        $this->local_db->delete('sip.tbl_pkt_sirup');
     }
 
     public function insert_tbl_pkt_sirup($data){
-        $this->local_db->insert('tbl_pkt_sirup', $data);
+        $this->local_db->insert('sip.tbl_pkt_sirup', $data);
     }
 
 
@@ -118,8 +128,8 @@ class Misc_tarikdata_model extends CI_Model {
             (a.btl1+a.btl2) AS pg_btl,
             (a.bl1+a.bl2+a.bl3) AS pg_bl
         ");
-        $this->smep_db->from("sirup_struktur_anggaran a");
-        $this->smep_db->join("simda_skpd b", "a.kd_skpd = b.kd_skpd");
+        $this->smep_db->from("sip.sirup_struktur_anggaran a");
+        $this->smep_db->join("sip.simda_skpd b", "a.kd_skpd = b.kd_skpd");
         $data = $this->smep_db->get();
         return $data;
     }

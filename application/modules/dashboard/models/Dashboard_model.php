@@ -97,7 +97,7 @@ class Dashboard_model extends CI_Model {
     		SUM(CASE WHEN motode_str = 'Seleksi' THEN 1 ELSE 0 END) AS jml_seleksi
     	");
     	$this->local_db->from("sip.tbl_pkt_penyedia");
-    	$this->local_db->WHERE("motode_str IN('tender','seleksi')");
+    	$this->local_db->WHERE("motode_str IN('Tender','Seleksi')");
     	$this->local_db->group_by("nama_satker");
     	$data = $this->local_db->get();
     	return $data;
@@ -106,8 +106,8 @@ class Dashboard_model extends CI_Model {
     public function paket_penyedia(){
     	$this->local_db->select("
     		DISTINCT(motode_str) AS metode_str, 
-		  	COUNT(CASE WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu < 50000000 THEN id END) AS pencatatan_non_tender,
-		  	(COUNT(CASE WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu BETWEEN 50000000 AND 200000000 THEN id END) + COUNT(CASE WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu BETWEEN 50000000 AND 100000000 THEN id END)) AS non_tender,
+		  	COUNT(CASE WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu::numeric < 50000000 THEN id END) AS pencatatan_non_tender,
+		  	(COUNT(CASE WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu::numeric BETWEEN 50000000 AND 200000000 THEN id END) + COUNT(CASE WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu::numeric BETWEEN 50000000 AND 100000000 THEN id END)) AS non_tender,
 		  	COUNT(CASE WHEN motode_str = 'Tender' THEN motode_str END) AS tender,
 		  	COUNT(CASE WHEN motode_str = 'Seleksi' THEN motode_str END) AS seleksi
     	");
@@ -118,7 +118,7 @@ class Dashboard_model extends CI_Model {
     }
 
     public function paket_swakelola(){
-        $this->local_db->select("DISTINCT (nama_satker) AS nama_satker, (SUM(total_pagu)/1000000000) as pagu");
+        $this->local_db->select("DISTINCT (nama_satker) AS nama_satker, (SUM(total_pagu::numeric)/1000000000) as pagu");
         $this->local_db->from("sip.tbl_pkt_penyedia");
         $this->local_db->group_by("nama_satker");
         $data = $this->local_db->get();
