@@ -19,7 +19,7 @@
 
 
 <script type="text/javascript">
-    jQuery(".navbar-page-title").html("Halaman Utama");
+    jQuery(".navbar-page-title").html("Dashboard "+jQuery(".js-klpd").val());
     
     // Initialize Bootstrap Tabs
     jQuery( '[data-toggle="tabs"] a, .js-tabs a' ).click( function(e) {
