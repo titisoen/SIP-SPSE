@@ -9,6 +9,7 @@ class Dashboard_controller extends CI_Controller {
 	}
 
 	public function main_page(){
+		$data['kode_klpd'] = $this->model->get_info_klpd()->row()->kode_klpd;
 		$data['klpd'] = $this->model->get_info_klpd()->row()->nama_klpd;
 		$this->load->view('data', $data);
 	}

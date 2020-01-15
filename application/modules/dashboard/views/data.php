@@ -1,3 +1,4 @@
+<input type="hidden" class="js-kode-klpd" value="<?=$kode_klpd;?>"/>
 <input type="hidden" class="js-klpd" value="<?=$klpd;?>"/>
 
 <div class="row">
@@ -19,7 +20,7 @@
 
 
 <script type="text/javascript">
-    jQuery(".navbar-page-title").html("Dashboard "+jQuery(".js-klpd").val());
+    jQuery(".navbar-page-title").html("Dashboard "+jQuery(".js-klpd").val()+" - "+jQuery(".js-kode-klpd").val());
     
     // Initialize Bootstrap Tabs
     jQuery( '[data-toggle="tabs"] a, .js-tabs a' ).click( function(e) {
