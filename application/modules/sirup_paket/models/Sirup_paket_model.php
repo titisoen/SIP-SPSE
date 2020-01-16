@@ -104,19 +104,19 @@ class Sirup_paket_model extends CI_Model {
         $this->local_db->select("
             COUNT(
                     CASE
-                        WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu < 50000000 THEN id
+                        WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu::NUMERIC < 50000000 THEN id
                     END
                 ) AS pencatatan_non_tender,
             (
                 COUNT(
                         CASE
-                            WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu BETWEEN 50000000 AND 200000000 THEN id
+                            WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu::NUMERIC BETWEEN 50000000 AND 200000000 THEN id
                         END
                     )
                         +
                 COUNT(
                         CASE
-                            WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu BETWEEN 50000000 AND 100000000 THEN id
+                            WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu::NUMERIC BETWEEN 50000000 AND 100000000 THEN id
                         END
                     )
             ) AS non_tender,
@@ -145,19 +145,19 @@ class Sirup_paket_model extends CI_Model {
             nama_satker,
             COUNT(
                     CASE
-                        WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu < 50000000 THEN id
+                        WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu::NUMERIC < 50000000 THEN id
                     END
                 ) AS pencatatan_non_tender,
             (
                 COUNT(
                         CASE
-                            WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu BETWEEN 50000000 AND 200000000 THEN id
+                            WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu::NUMERIC BETWEEN 50000000 AND 200000000 THEN id
                         END
                     )
                         +
                 COUNT(
                         CASE
-                            WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu BETWEEN 50000000 AND 100000000 THEN id
+                            WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu::NUMERIC BETWEEN 50000000 AND 100000000 THEN id
                         END
                     )
             ) AS non_tender,
@@ -186,19 +186,19 @@ class Sirup_paket_model extends CI_Model {
         $this->local_db->select("
             COUNT(
                     CASE
-                        WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu < 50000000 THEN id
+                        WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu::NUMERIC < 50000000 THEN id
                     END
                 ) AS pencatatan_non_tender,
             (
                 COUNT(
                         CASE
-                            WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu BETWEEN 50000000 AND 200000000 THEN id
+                            WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu::NUMERIC BETWEEN 50000000 AND 200000000 THEN id
                         END
                     )
                         +
                 COUNT(
                         CASE
-                            WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu BETWEEN 50000000 AND 100000000 THEN id
+                            WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu::NUMERIC BETWEEN 50000000 AND 100000000 THEN id
                         END
                     )
             ) AS non_tender,
@@ -257,19 +257,19 @@ class Sirup_paket_model extends CI_Model {
             total_pagu,
             COUNT(
                     CASE
-                        WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu < 50000000 THEN id
+                        WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi','Jasa Konsultansi') AND total_pagu::NUMERIC < 50000000 THEN id
                     END
                 ) AS pencatatan_non_tender,
             (
                 COUNT(
                         CASE
-                            WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu BETWEEN 50000000 AND 200000000 THEN id
+                            WHEN jenis_pengadaan_str IN ('Barang','Jasa Lainnya','Pekerjaan Konstruksi') AND total_pagu::NUMERIC BETWEEN 50000000 AND 200000000 THEN id
                         END
                     )
                         +
                 COUNT(
                         CASE
-                            WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu BETWEEN 50000000 AND 100000000 THEN id
+                            WHEN jenis_pengadaan_str IN ('Jasa Konsultansi') AND total_pagu::NUMERIC BETWEEN 50000000 AND 100000000 THEN id
                         END
                     )
             ) AS non_tender,
