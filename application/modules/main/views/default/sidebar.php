@@ -79,9 +79,11 @@
                 <?php
                     }
                 ?>
+								<!--
                 <li class="nav-item active">
                     <a href="#" class="open-misc-download"><i class="fa fa-cloud-download"></i>&nbsp;Download Files</a>
                 </li>
+								-->
             </ul>
         </nav>
 
