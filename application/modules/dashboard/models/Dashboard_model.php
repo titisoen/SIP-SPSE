@@ -401,4 +401,14 @@ class Dashboard_model extends CI_Model {
         $data = $this->pg_db->get();
         return $data;
     }
+
+    public function get_rentang_tahun(){
+        $this->pg_db->select("
+					MIN(date_part('year'::text, lls_dibuat_tanggal)) tahun_awal,
+					MAX(date_part('year'::text, lls_dibuat_tanggal)) tahun_akhir
+        ");
+        $this->pg_db->from("public.lelang_seleksi");
+				$this->pg_db->where("date_part('year'::text, lls_dibuat_tanggal)!=", 1970);
+        return $this->pg_db->get();
+    }
 }

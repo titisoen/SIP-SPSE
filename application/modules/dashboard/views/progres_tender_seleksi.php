@@ -5,7 +5,7 @@
         </div>
         <div class="card-block">
             <div id="dashboard-progres-tender-seleksi" style="width: 100%; height: 350px;"></div>
-            <p style="text-align: center;padding-top: 20px;"><b>Progres Hasil Tender/Seleksi Tahun 2012 - 2019</b></p>
+            <p style="text-align: center;padding-top: 20px;"><b>Progres Hasil Tender/Seleksi Tahun <?=$tahun_awal.'-'.$tahun_akhir;?></b></p>
         </div>
     </div>
 </div>

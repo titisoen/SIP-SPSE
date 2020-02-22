@@ -10,9 +10,9 @@
                 <div class="col-md-10">
                     <select class="dashboard-pencarian-data js-select2 form-control"style="width: 100%;">
                         <?php $date = date('Y');?>
-                        <option value="all">Dari Tahun 2012 - <?=$date?></option>
+                        <option value="all">Dari Tahun <?=$tahun_awal.'-'.$tahun_akhir;?></option>
                         <?php
-                            for ($i=2012; $i <= $date ; $i++) {
+                            for ($i=$tahun_awal; $i <= $tahun_akhir ; $i++) {
                         ?>
                                 <option value="<?=$i?>">Tahun <?=$i?></option>
                         <?php

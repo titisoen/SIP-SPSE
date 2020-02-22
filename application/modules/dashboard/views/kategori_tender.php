@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="card dasboard-kategori-tender">
         <div class="card-header">
-            <h4>TENDER BERDASARKAN KATEGORI TAHUN 2012 - 2019</h4>
+            <h4>TENDER BERDASARKAN KATEGORI TAHUN <?=$tahun_awal.'-'.$tahun_akhir;?></h4>
         </div>
         <div class="card-block">
             <table class="dashboard-kategori-tender-table table table-bordered table-striped table-vcenter js-dataTable-full">
@@ -19,7 +19,7 @@
 <script type="text/javascript">
     //*****************************************************
     //*                                             
-    //* TENDER BERDASARKAN KATEGORI TAHUN 2012-2019
+    //* TENDER BERDASARKAN KATEGORI
     //*                                             
     //*****************************************************
 

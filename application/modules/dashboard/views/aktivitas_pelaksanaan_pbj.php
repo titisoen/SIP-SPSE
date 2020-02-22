@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="card dashboard-pelaksanaan-pbj">
         <div class="card-header">
-            <h4><i class="fa fa-bar-chart"></i>&nbsp;GRAFIK AKTIVITAS PELAKSANAAN PBJ TAHUN 2012-2019</h4>
+            <h4><i class="fa fa-bar-chart"></i>&nbsp;GRAFIK AKTIVITAS PELAKSANAAN PBJ TAHUN <?=$tahun_awal.'-'.$tahun_akhir;?></h4>
             <ul class="card-actions">
                 <li>
                     <button type="button" data-toggle="card-action" data-action="content_toggle"></button>
@@ -47,7 +47,7 @@
     
     //**********************************************
     //*                                             
-    //* GRAFIK AKTIVITAS PELAKSANAAN PBJ TAHUN 2012-2019
+    //* GRAFIK AKTIVITAS PELAKSANAAN PBJ 
     //*                                             
     //**********************************************
 
