@@ -51,32 +51,58 @@ class Main_controller extends CI_Controller {
 		$data["misc"] 	= array("nama_kota" => $nama_kota, "nama_admin" => $nama_admin, "url_admin" => $url_admin);
 		$data['kode_klpd'] = $this->model->get_info_klpd()->row()->kode_klpd;
 		$data['klpd'] = $this->model->get_info_klpd()->row()->nama_klpd;
-		$data['build'] = $this->get_build();
+		$data['build'] = $this->get_latest_build();
 		$this->load->view('Main_view', $data);
 	}
 	
-	public function get_build(){
-		$date = new DateTime();
+	public function get_latest_build(){
+		$log_num = 1; // Load Last 1 Git Logs
+		$git_history = [];
+		$git_logs = [];
+		exec("git log -".$log_num, $git_logs);
 
-		$fn = fopen(".git/logs/HEAD","r");
-		
-		$build = '';
-		
-		while(! feof($fn))
+		// Parse Logs
+		$last_hash = null;
+		foreach ($git_logs as $line)
 		{
-			$result = fgets($fn);
-			if (count(explode('+0700', $result))>1)
-			{			
-				list($a, $b) = explode('+0700', $result);
-				$arr = explode(' ', trim($a));
-				$timestamp = end($arr);
-				$date->setTimestamp($timestamp);
-				//echo 'Build: ' . $date->format('d-m-Y H:i:s') . ' # '. trim(str_replace('commit:', '', $b));
-				$build = $date->format('d-m-Y H:i:s');
-			}
+				// Clean Line
+				$line = trim($line);
+
+				// Proceed If There Are Any Lines
+				if (!empty($line))
+				{
+						// Commit
+						if (strpos($line, 'commit') !== false)
+						{
+								$hash = explode(' ', $line);
+								$hash = trim(end($hash));
+								$git_history[$hash] = [
+										'message' => ''
+								];
+								$last_hash = $hash;
+						}
+
+						// Author
+						else if (strpos($line, 'Author') !== false) {
+								$author = explode(':', $line);
+								$author = trim(end($author));
+								$git_history[$last_hash]['author'] = $author;
+						}
+
+						// Date
+						else if (strpos($line, 'Date') !== false) {
+								$date = explode(':', $line, 2);
+								$date = trim(end($date));
+								$git_history[$last_hash]['date'] = date('d-m-Y H:i:s', strtotime($date));
+						}
+
+						// Message
+						else {
+								$git_history[$last_hash]['message'] .= $line ." ";
+						}
+				}
 		}
-		fclose($fn);
-		
-		return 'Build: ' . $build;
+
+		return 'Build: ' . $git_history[$last_hash]['date'];
 	}
 }
