@@ -315,6 +315,8 @@ CREATE TABLE IF NOT EXISTS sip.tbl_users(
 
 ALTER TABLE sip.tbl_users OWNER TO epns;
 
+INSERT INTO sip.tbl_users (id, nama, email, username, password, kd_skpd, nip, security_quest, security_answer, tanggal_buat, tanggal_update) VALUES (1,	'ADMINISTRATOR',	'adbang.ponorogo@gmail.com',	'admin_sip',	'$2y$10$hVuNB6mdKy2m8F3BQNRB4e5J9xCKVt.7ko7l.AZad0Om14s5z47Pa',	'4.1.3.4',	123456789012345678,	'1',	'administrator',	'2019-08-02 02:07:07.888',	'2019-08-02 09:07:07.888') ON CONFLICT (id) DO NOTHING;
+
 -- TABEL VIEW rekap_apbd 01 --
 
 CREATE OR REPLACE VIEW sip.rekap_apbd AS
