@@ -105,6 +105,6 @@ class Main_controller extends CI_Controller {
 			}
 		}
 
-		return 'Build: ' . (count($git_history))? $git_history[$last_hash]['date'] : 'n/a';
+		return 'Build: ' . ((count($git_history))? $git_history[$last_hash]['date'] : 'n/a');
 	}
 }
