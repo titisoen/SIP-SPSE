@@ -408,8 +408,7 @@ class Dashboard_model extends CI_Model {
 					MAX(date_part('year'::text, lls_dibuat_tanggal)) tahun_akhir
         ");
         $this->pg_db->from("public.lelang_seleksi");
-				$this->pg_db->where("date_part('year'::text, lls_dibuat_tanggal)!=", 1970);
-				$this->pg_db->where("date_part('year'::text, lls_dibuat_tanggal)!=", 1969);
+				$this->pg_db->where("date_part('year'::text, lls_dibuat_tanggal)>", 2007);
         return $this->pg_db->get();
     }
 }
