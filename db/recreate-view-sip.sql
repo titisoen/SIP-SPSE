@@ -1067,7 +1067,7 @@ JOIN (
 		cfg_sub_category='ppe.nama'
 	) cfg
 ON
-	UPPER(b.nama) LIKE '%' || UPPER(cfg.nama) || '%'
+	UPPER(b.nama) LIKE '%' || UPPER(cfg.nama)
 	;
 	
 ALTER TABLE sip.danang_klpd OWNER TO epns;
