@@ -409,6 +409,7 @@ class Dashboard_model extends CI_Model {
         ");
         $this->pg_db->from("public.lelang_seleksi");
 				$this->pg_db->where("date_part('year'::text, lls_dibuat_tanggal)!=", 1970);
+				$this->pg_db->where("date_part('year'::text, lls_dibuat_tanggal)!=", 1969);
         return $this->pg_db->get();
     }
 }
