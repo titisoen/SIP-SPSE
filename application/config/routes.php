@@ -364,6 +364,16 @@ $route['rekanan/profil/data/page/main'] = 'rekanan_profil/Rekanan_profil_control
 $route['rekanan/profil/data/rekanan-provinsi/(:any)'] = 'rekanan_profil/Rekanan_profil_controller/rekanan_provinsi/$1';
 $route['rekanan/profil/data/rekanan-kabupaten/(:any)'] = 'rekanan_profil/Rekanan_profil_controller/rekanan_kabupaten/$1';
 $route['rekanan/profil/data/kelompok-usaha-kabupaten/(:any)'] = 'rekanan_profil/Rekanan_profil_controller/kelompok_usaha_kabupaten/$1';
+$route['rekanan/profil/data/rekanan-verifikasi/(:any)'] = 'rekanan_profil/Rekanan_profil_controller/rekanan_verifikasi/$1';
+/*
+| -------------------------------------------------------------------
+| Routes = Rekanan/Informasi
+| -------------------------------------------------------------------
+*/
+$route['rekanan/info/data/page/main'] = 'rekanan_info/Rekanan_info_controller/main_page';
+$route['rekanan/info/data/rekanan-verifikasi/(:any)'] = 'rekanan_info/Rekanan_info_controller/rekanan_verifikasi/$1';
+
+
 
 
 
