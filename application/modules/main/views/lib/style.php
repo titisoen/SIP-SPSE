@@ -3,7 +3,7 @@
 <link rel="icon" href="<?=base_url('assets/uploads/favicons/icon.png')?>" />
 
 <!-- Google fonts -->
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,900%7CRoboto+Slab:300,400%7CRoboto+Mono:400" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,900%7CRoboto+Slab:300,400%7CRoboto+Mono:400" />
 
 <!-- Call Jquery -->
 <script src="<?=base_url('assets/js/core/jquery.min.js')?>"></script>
