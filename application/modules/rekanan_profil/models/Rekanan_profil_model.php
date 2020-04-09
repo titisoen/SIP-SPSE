@@ -106,7 +106,7 @@ class Rekanan_profil_model extends CI_Model {
             COUNT(c.rkn_id) AS rkn,
             sum(
                 CASE
-                WHEN c.rkn_status_verifikasi::text = '0000000'::text THEN 1
+                WHEN c.rkn_status_verifikasi::text LIKE '0%'::text THEN 1
                 ELSE 0
                 END) AS blm,                
             sum(
@@ -116,8 +116,7 @@ class Rekanan_profil_model extends CI_Model {
               END) AS tolak,
             sum(
               CASE
-              WHEN c.rkn_status_verifikasi::text = '1111111'::text THEN 1
-              WHEN c.rkn_status_verifikasi::text = '1111'::text THEN 1
+              WHEN c.rkn_status_verifikasi::text LIKE '1%'::text THEN 1
               ELSE 0
               END) AS sdh
         ");
@@ -138,7 +137,7 @@ class Rekanan_profil_model extends CI_Model {
             COUNT(c.rkn_id) AS rkn,
             SUM(
                 CASE
-                    WHEN c.rkn_status_verifikasi::text = '0000000'::text THEN 1
+                    WHEN c.rkn_status_verifikasi::text LIKE '0%'::text THEN 1
                 ELSE 0
                 END
             ) AS blm,                
@@ -150,8 +149,7 @@ class Rekanan_profil_model extends CI_Model {
             ) AS tolak,
             SUM(
               CASE
-                WHEN c.rkn_status_verifikasi::text = '1111111'::text THEN 1
-                WHEN c.rkn_status_verifikasi::text = '1111'::text THEN 1
+                WHEN c.rkn_status_verifikasi::text LIKE '1%'::text THEN 1
               ELSE 0
               END
             ) AS sdh
@@ -166,15 +164,13 @@ class Rekanan_profil_model extends CI_Model {
         return $data;
     }
 
-
-
     public function rekanan_kabupaten($tahun){
         $this->pg_db->select("
             a.kbp_nama,
             COUNT(b.rkn_id) AS rkn,
             SUM(
                 CASE
-                    WHEN b.rkn_status_verifikasi::text = '0000000'::text THEN 1
+                    WHEN b.rkn_status_verifikasi::text LIKE '0%'::text THEN 1
                 ELSE 0
                 END
             ) AS blm,                
@@ -186,8 +182,7 @@ class Rekanan_profil_model extends CI_Model {
             ) AS tolak,
             SUM(
               CASE
-                WHEN b.rkn_status_verifikasi::text = '1111111'::text THEN 1
-                WHEN b.rkn_status_verifikasi::text = '1111'::text THEN 1
+                WHEN b.rkn_status_verifikasi::text LIKE '1%'::text THEN 1
               ELSE 0
               END
             ) AS sdh
@@ -209,7 +204,7 @@ class Rekanan_profil_model extends CI_Model {
             COUNT(b.rkn_id) AS rkn,
             SUM(
                 CASE
-                    WHEN b.rkn_status_verifikasi::text = '0000000'::text THEN 1
+                    WHEN b.rkn_status_verifikasi::text LIKE '0%'::text THEN 1
                 ELSE 0
                 END
             ) AS blm,                
@@ -221,8 +216,7 @@ class Rekanan_profil_model extends CI_Model {
             ) AS tolak,
             SUM(
               CASE
-                WHEN b.rkn_status_verifikasi::text = '1111111'::text THEN 1
-                WHEN b.rkn_status_verifikasi::text = '1111'::text THEN 1
+                WHEN b.rkn_status_verifikasi::text LIKE '1%'::text THEN 1
               ELSE 0
               END
             ) AS sdh
