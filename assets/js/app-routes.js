@@ -105,6 +105,10 @@ jQuery(document).on("click", ".open-rekanan-profil-data", function(){
 	jQuery(".app-content").load("../rekanan/profil/data/page/main");
 	return false;
 });
+jQuery(document).on("click", ".open-rekanan-info-data", function(){
+	jQuery(".app-content").load("../rekanan/info/data/page/main");
+	return false;
+});
 
 
 /* --------------------------------------------------------
