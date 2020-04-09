@@ -45,7 +45,7 @@
                 <li class="nav-item nav-item-has-subnav">
                     <a href="javascript:void(0)"><i class="fa fa-database"></i>&nbsp;Data Paket SiRUP</a>
                     <ul class="nav nav-subnav">
-                        <!--li><a href="#" class="open-sirup-rekapitulasi-sirup">Rekapitulasi SiRUP</a></li-->
+                        <!-- <li><a href="#" class="open-sirup-rekapitulasi-sirup">Rekapitulasi SiRUP</a></li> -->
                         <li><a href="#" class="open-sirup-paket-sirup">Paket SiRUP</a></li>
                         <li><a href="#" class="open-sirup-data-sirup">Data SiRUP</a></li>
                     </ul>
@@ -60,6 +60,13 @@
                     <a href="javascript:void(0)"><i class="fa fa-database"></i>&nbsp;Rekanan</a>
                     <ul class="nav nav-subnav">
                         <li><a href="#" class="open-rekanan-profil-data">Profil</a></li>
+                        <?php
+                            if (!empty($this->session->userdata('auth_id'))) {
+                        ?>
+                            <li><a href="#" class="open-rekanan-info-data">Informasi Rekanan</a></li>
+                        <?php
+                            }
+                        ?>
                     </ul>
                 </li>
 
