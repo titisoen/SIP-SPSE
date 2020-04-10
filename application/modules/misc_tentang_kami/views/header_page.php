@@ -5,8 +5,8 @@
 	<div class="card-block card-profile-block text-xs-center text-sm-left">
 		<img class="img-avatar img-avatar-96" src="<?=base_url()?>assets/uploads/logo/reog-vector-icon.png" style="background: #44cc68;">
 		<div class="profile-info font-500">
-			<b class="misc-tentangkami-profile-namaadmin"></b>
-			<div class="small text-muted m-t-xs misc-tentangkami-profile-email"></div>
+			<b>Komunitas LPSE</b>
+			<div class="small text-muted m-t-xs">adbang.ponorogo@gmail.com</div>
 		</div>
 	</div>
 </div>
