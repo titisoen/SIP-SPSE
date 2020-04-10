@@ -1,12 +1,15 @@
 <div class="row">
     <?php
         include_once 'header_page.php';
+		include_once 'page_data.php';
+		/*
         if (empty($this->session->userdata('auth_id'))) {
         	include_once 'page_data.php';
         }
         else{
         	include_once 'register_data.php';
-        }
+		}
+		*/
     ?>
     
 </div>

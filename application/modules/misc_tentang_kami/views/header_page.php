@@ -6,7 +6,7 @@
 		<img class="img-avatar img-avatar-96" src="<?=base_url()?>assets/uploads/logo/reog-vector-icon.png" style="background: #44cc68;">
 		<div class="profile-info font-500">
 			<b>Komunitas LPSE</b>
-			<div class="small text-muted m-t-xs">adbang.ponorogo@gmail.com</div>
+			<div class="small text-muted m-t-xs">adbang.ponorogo @ gmail.com</div>
 		</div>
 	</div>
 </div>
