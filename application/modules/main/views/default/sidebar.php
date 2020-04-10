@@ -77,9 +77,9 @@
                 <?php
                     if (!empty($this->session->userdata('auth_id'))) {
                 ?>
-                        <li class="nav-item active">
+                        <!--li class="nav-item active">
                             <a href="#" class="open-misc-autentikasi"><i class="fa fa-eye"></i>&nbsp;Data Autentikasi</a>
-                        </li>
+                        </li-->
                         <li class="nav-item active">
                             <a href="#" class="open-misc-tarik-data"><i class="fa fa-cloud-download"></i>&nbsp;Tarik Data</a>
                         </li>
