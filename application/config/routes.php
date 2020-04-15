@@ -371,7 +371,9 @@ $route['rekanan/profil/data/rekanan-verifikasi/(:any)'] = 'rekanan_profil/Rekana
 | -------------------------------------------------------------------
 */
 $route['rekanan/info/data/page/main'] = 'rekanan_info/Rekanan_info_controller/main_page';
+$route['rekanan/info/data/rekap/(:any)'] = 'rekanan_info/Rekanan_info_controller/rekap_rekanan/$1';
 $route['rekanan/info/data/rekanan-verifikasi/(:any)'] = 'rekanan_info/Rekanan_info_controller/rekanan_verifikasi/$1';
+$route['rekanan/info/data/rekanan-roaming/(:any)'] = 'rekanan_info/Rekanan_info_controller/rekanan_roaming/$1';
 
 
 

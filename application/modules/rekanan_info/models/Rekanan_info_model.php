@@ -100,6 +100,19 @@ class Rekanan_info_model extends CI_Model {
     // ||
     // ****************************************
 
+    public function rekap_rekanan($tahun, $repo_id) {
+        $this->pg_db->select("
+        SUM(CASE WHEN rkn_status = '1' THEN 1 ELSE 0 END) AS rekanan_semua,
+        SUM(CASE WHEN repo_id = $repo_id AND rkn_status = '1' THEN 1 ELSE 0 END) AS rekanan_verifikasi,
+        SUM(CASE WHEN repo_id != $repo_id AND rkn_status = '1' THEN 1 ELSE 0 END) AS rekanan_roaming");
+        $this->pg_db->from("rekanan");
+        if ($tahun != 'all') {
+            $this->pg_db->where("DATE_PART('year'::text, rkn_tgl_daftar) =", $tahun+0);
+        }
+        $data = $this->pg_db->get();
+        return $data;
+    }
+
     public function rekanan_verifikasi($tahun, $repo_id) {
         $this->pg_db->select("a.rkn_nama");
         $this->pg_db->select("
@@ -122,9 +135,42 @@ class Rekanan_info_model extends CI_Model {
         to_char(a.rkn_tgl_daftar, 'DD-MM-YYYY') AS tgl_daftar,
         to_char(a.rkn_tgl_setuju, 'DD-MM-YYYY') AS tgl_setuju");
         $this->pg_db->from("rekanan a");
-        $this->pg_db->join("kabupaten b", "a.kbp_id = b.kbp_id");
+        $this->pg_db->join("kabupaten b", "a.kbp_id = b.kbp_id", "left outer");
         $this->pg_db->where("rkn_status" , "1");
         $this->pg_db->where("repo_id", $repo_id);
+        if ($tahun != 'all') {
+            $this->pg_db->where("DATE_PART('year'::text, a.rkn_tgl_daftar) =", $tahun+0);
+        }
+        $this->pg_db->order_by("a.rkn_nama", "ASC");
+        $data = $this->pg_db->get();
+        return $data;
+      }
+
+      public function rekanan_roaming($tahun, $repo_id) {
+        $this->pg_db->select("a.rkn_nama");
+        $this->pg_db->select("
+        CASE
+        WHEN a.btu_id = '01'::bpchar THEN 'CV'::text
+        WHEN a.btu_id = '02'::bpchar THEN 'PT'::text
+        WHEN a.btu_id = '03'::bpchar THEN 'UD'::text
+        WHEN a.btu_id = '04'::bpchar THEN 'Koperasi'::text
+        WHEN a.btu_id = '05'::bpchar THEN 'Firma'::text
+        WHEN a.btu_id = '06'::bpchar THEN 'Perusahaan Perseorangan'::text
+        WHEN a.btu_id = '07'::bpchar THEN 'Konsultan Perorangan'::text
+        WHEN a.btu_id = '08'::bpchar THEN 'Perusahaan Dagang'::text
+        WHEN a.btu_id = '09'::bpchar THEN 'Perusahaan Asing'::text
+        WHEN a.btu_id = '10'::bpchar THEN 'Lembaga Penyiaran Publik'::text
+        END AS jenisrekanan");
+        $this->pg_db->select("b.kbp_nama,
+        a.rkn_alamat,
+        a.rkn_npwp,
+        a.rkn_email,
+        to_char(a.rkn_tgl_daftar, 'DD-MM-YYYY') AS tgl_daftar,
+        to_char(a.rkn_tgl_setuju, 'DD-MM-YYYY') AS tgl_setuju");
+        $this->pg_db->from("rekanan a");
+        $this->pg_db->join("kabupaten b", "a.kbp_id = b.kbp_id", "left outer");
+        $this->pg_db->where("rkn_status" , "1");
+        $this->pg_db->where("repo_id !=", $repo_id);
         if ($tahun != 'all') {
             $this->pg_db->where("DATE_PART('year'::text, a.rkn_tgl_daftar) =", $tahun+0);
         }

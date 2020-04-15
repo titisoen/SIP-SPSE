@@ -1,7 +1,9 @@
 <div class="row">
     <?php
         include_once 'pencarian_data.php';
+        include_once 'rekap_rekanan.php';
         include_once 'rekanan_verifikasi.php';
+        include_once 'rekanan_roaming.php';
     ?>
     
 </div>

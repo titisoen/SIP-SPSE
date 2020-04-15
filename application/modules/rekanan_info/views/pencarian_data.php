@@ -48,7 +48,9 @@
 
     jQuery(document).on("click", ".rekanan-info-pencarian-data-btn", function(){
         var tahun = jQuery(".rekanan-info-pencarian-data-tahun").val();
+        refresh_rekanan_info_rekap_rekanan(tahun);
         refresh_rekanan_info_rekanan_verifikasi(tahun);
+        refresh_rekanan_info_rekanan_roaming(tahun);
         return false;
     });
 </script>
