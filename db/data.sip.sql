@@ -634,7 +634,7 @@ WHERE pa.pkt_id=pkt.pkt_id
 AND lls.pkt_id = pkt.pkt_id 
 AND agc.agc_id = pnt.agc_id 
 AND lls.lls_status = 1::numeric 
-AND stk.stk_id = pnt.stk_id 
+AND stk.stk_id = pa.stk_id 
 AND pnt.pnt_id = pkt.pnt_id
 ORDER BY (date_part('year'::text, pkt.pkt_tgl_buat)) DESC;
 

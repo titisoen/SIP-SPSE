@@ -436,7 +436,7 @@ WHEN lls.mtd_pemilihan = 1::numeric THEN 'e-Lelang Sederhana'::text
 WHEN lls.mtd_pemilihan = 2::numeric THEN 'e-Lelang Pemilihan Langsung'::text
 WHEN lls.mtd_pemilihan = 3::numeric THEN 'e-Seleksi Umum'::text
 WHEN lls.mtd_pemilihan = 4::numeric THEN 'e-Seleksi Sederhana'::text
-WHEN lls.mtd_pemilihan = 9::numeric THEN 'e-Lelang Cepat'::text
+WHEN lls.mtd_pemilihan = 9::numeric THEN 'Tender Cepat'::text
 WHEN lls.mtd_pemilihan = 15::numeric THEN 'Tender'::text
 WHEN lls.mtd_pemilihan = 16::numeric THEN 'Seleksi'::text
 ELSE 'Belum Kategori'::text
@@ -484,7 +484,7 @@ WHERE pa.pkt_id=pkt.pkt_id
 AND lls.pkt_id = pkt.pkt_id 
 AND agc.agc_id = pnt.agc_id 
 AND lls.lls_status = 1::numeric 
-AND stk.stk_id = pnt.stk_id 
+AND stk.stk_id = pa.stk_id 
 AND pnt.pnt_id = pkt.pnt_id
 ORDER BY (date_part('year'::text, pkt.pkt_tgl_buat)) DESC;
 
@@ -501,7 +501,7 @@ WHEN lls.mtd_pemilihan = 1::numeric THEN 'e-Lelang Sederhana'::text
 WHEN lls.mtd_pemilihan = 2::numeric THEN 'e-Lelang Pemilihan Langsung'::text
 WHEN lls.mtd_pemilihan = 3::numeric THEN 'e-Seleksi Umum'::text
 WHEN lls.mtd_pemilihan = 4::numeric THEN 'e-Seleksi Sederhana'::text
-WHEN lls.mtd_pemilihan = 9::numeric THEN 'e-Lelang Cepat'::text
+WHEN lls.mtd_pemilihan = 9::numeric THEN 'Tender Cepat'::text
 WHEN lls.mtd_pemilihan = 15::numeric THEN 'Tender'::text
 WHEN lls.mtd_pemilihan = 16::numeric THEN 'Seleksi'::text
 ELSE 'Belum Kategori'::text
@@ -661,7 +661,7 @@ WHEN lls.mtd_pemilihan = 1::numeric THEN 'e-Lelang Sederhana'::text
 WHEN lls.mtd_pemilihan = 2::numeric THEN 'e-Lelang Pemilihan Langsung'::text
 WHEN lls.mtd_pemilihan = 3::numeric THEN 'e-Seleksi Umum'::text
 WHEN lls.mtd_pemilihan = 4::numeric THEN 'e-Seleksi Sederhana'::text
-WHEN lls.mtd_pemilihan = 9::numeric THEN 'e-Lelang Cepat'::text
+WHEN lls.mtd_pemilihan = 9::numeric THEN 'Tender Cepat'::text
 WHEN lls.mtd_pemilihan = 15::numeric THEN 'Tender'::text
 WHEN lls.mtd_pemilihan = 16::numeric THEN 'Seleksi'::text
 ELSE 'Belum Kategori'::text
@@ -833,7 +833,7 @@ WHEN c.mtd_pemilihan = 1::numeric THEN 'e-Lelang Sederhana'::text
 WHEN c.mtd_pemilihan = 2::numeric THEN 'e-Lelang Pemilihan Langsung'::text
 WHEN c.mtd_pemilihan = 3::numeric THEN 'e-Seleksi Umum'::text
 WHEN c.mtd_pemilihan = 4::numeric THEN 'e-Seleksi Sederhana'::text
-WHEN c.mtd_pemilihan = 9::numeric THEN 'e-Lelang Cepat'::text
+WHEN c.mtd_pemilihan = 9::numeric THEN 'Tender Cepat'::text
 WHEN c.mtd_pemilihan = 15::numeric THEN 'Tender'::text
 WHEN c.mtd_pemilihan = 16::numeric THEN 'Seleksi'::text
 ELSE 'Belum Kategori'::text
