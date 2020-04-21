@@ -71,6 +71,14 @@ jQuery(document).on("click", ".open-paket-nontendering-paketgagal", function(){
 	return false;
 });
 
+/* --------------------------------------------------------
+* -------------- REPORT - PAKET PENCATATAN NON TENDER ----------------
+*----------------------------------------------------------*/
+jQuery(document).on("click", ".open-catat-nontender-paketpengadaan", function(){
+	jQuery(".app-content").load("../paket-catat-non-tender/paket-pengadaan/page/main");
+	return false;
+});
+
 
 /* --------------------------------------------------------
 * ----------------------- SiRUP ---------------------------

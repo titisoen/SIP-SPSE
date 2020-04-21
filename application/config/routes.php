@@ -265,7 +265,20 @@ $route['paket-non-tendering/paket-gagal/data/rekap-gagal/(:any)'] = 'nontenderin
 $route['paket-non-tendering/paket-gagal/data/data-gagal/(:any)'] = 'nontendering_paket_gagal/Nontendering_paketgagal_controller/data_gagal/$1';
 
 
-
+/*
+| -------------------------------------------------------------------
+| ------------------------------
+| Routes = REPORT/PAKET PENCATATAN-NON-TENDER
+| ------------------------------
+| -------------------------------------------------------------------
+*/
+/*
+| -------------------------------------------------------------------
+| Routes = REPORT/PAKET PENCATATAN-NON-TENDER/PAKET PENGADAAN
+| -------------------------------------------------------------------
+*/
+$route['paket-catat-non-tender/paket-pengadaan/page/main'] = 'pencatatan_nontender_paket_pengadaan/Catatnontender_paketpengadaan_controller/main_page';
+$route['paket-catat-non-tender/paket-pengadaan/data/data-paket/(:any)'] = 'pencatatan_nontender_paket_pengadaan/Catatnontender_paketpengadaan_controller/data_paket/$1';
 
 
 /*
