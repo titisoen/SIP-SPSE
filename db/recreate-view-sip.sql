@@ -25,6 +25,23 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Script check Role epns Exist
+--
+
+DO $$
+BEGIN
+  CREATE ROLE epns LOGIN PASSWORD 'epns';
+  EXCEPTION WHEN DUPLICATE_OBJECT THEN
+  RAISE NOTICE 'not creating role my_role -- it already exists';
+END
+$$;
+
+--Script check database exist
+--SELECT 'CREATE DATABASE epns_prod OWNER epns'
+--WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'epns_prod')\gexec
+
+
+--
 -- Name: sip; Type: SCHEMA; Schema: -; Owner: epns
 --
 
