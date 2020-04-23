@@ -28,6 +28,7 @@
                         <li>Danang - danang.dandies @ gmail.com - Ponorogo, Jatim</li>
                         <li>Febima - febimahermawan16 @ gmail.com - Ponorogo, Jatim</li>
                         <li>Hafizh - hfz.irawan @ gmail.com - Tangsel, Banten</li>
+                        <li>Jeffry - lpse.gresik @ gmail.com - Gresik, Jatim</li>
                     </ul>
                 </div>
             </div>
