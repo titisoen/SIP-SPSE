@@ -2,7 +2,7 @@
     <?php
         include_once 'api_sirup.php';
         include_once 'json_sirup.php';
-        include_once 'data_smep.php';
+        //include_once 'data_smep.php';
     ?>
     
 </div>
