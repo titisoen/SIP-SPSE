@@ -712,16 +712,21 @@ WHEN pkt.kgr_id = 3::numeric THEN 'Jasa Lainnya'::text
 ELSE 'J.Konsultansi P.Org'::text
 END AS kategori,
 pkt.kgr_id
+
 FROM public.lelang_seleksi lls,
 public.paket pkt,
 public.satuan_kerja stk,
 public.panitia pnt,
+public.paket_satker pa,
 public.agency agc
-WHERE lls.pkt_id = pkt.pkt_id 
+
+WHERE pa.pkt_id=pkt.pkt_id
+AND lls.pkt_id = pkt.pkt_id 
 AND agc.agc_id = pnt.agc_id 
 AND lls.lls_status > 0::numeric 
-AND stk.stk_id = pnt.stk_id 
+AND stk.stk_id = pa.stk_id 
 AND pnt.pnt_id = pkt.pnt_id
+
 ORDER BY (date_part('year'::text, pkt.pkt_tgl_buat)) DESC;
 
 ALTER TABLE sip.status_lelang OWNER TO epns;
