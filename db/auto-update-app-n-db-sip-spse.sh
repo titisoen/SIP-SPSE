@@ -1,5 +1,5 @@
 #!/bin/bash
-# 0 1 * * * /var/www/html/sip-spse/db/auto-update-app-n-db-sip-spse.sh
+# 0 1 * * * /bin/sh /var/www/html/sip-spse/db/auto-update-app-n-db-sip-spse.sh
 
 cd /var/www/html/sip-spse/
 git pull
