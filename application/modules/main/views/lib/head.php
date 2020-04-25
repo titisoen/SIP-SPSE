@@ -6,3 +6,4 @@
 <meta name="description" content="SIP SPSE! adalah Aplikasi E-Reporting yang memberikan informasi tentang progres pengadaan barang/jasa Pemerintah " />
 <meta name="author" content="LPSE Kabupaten Ponorogo" />
 <meta name="robots" content="noindex, nofollow" />
+<link class="icon-site" rel="icon" type="image/icon" href="<?=base_url()?>favicon.png">
