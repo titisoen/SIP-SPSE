@@ -51,7 +51,7 @@
                 <li class="nav-item nav-item-has-subnav">
                     <a href="javascript:void(0)"><i class="fa fa-database"></i>&nbsp;Data Paket SiRUP</a>
                     <ul class="nav nav-subnav">
-                        <!-- <li><a href="#" class="open-sirup-rekapitulasi-sirup">Rekapitulasi SiRUP</a></li> -->
+                        <li><a href="#" class="open-sirup-rekapitulasi-sirup">Rekapitulasi SiRUP</a></li>
                         <li><a href="#" class="open-sirup-paket-sirup">Paket SiRUP</a></li>
                         <li><a href="#" class="open-sirup-data-sirup">Data SiRUP</a></li>
                     </ul>
