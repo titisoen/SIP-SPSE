@@ -567,7 +567,7 @@ CREATE OR REPLACE VIEW sip.narno_menang AS
            FROM public.evaluasi evaluasi_1
           WHERE ((evaluasi_1.lls_id, evaluasi_1.eva_versi) IN ( SELECT evaluasi_2.lls_id,
                     max(evaluasi_2.eva_versi) AS max
-                   FROM evaluasi evaluasi_2
+                   FROM public.evaluasi evaluasi_2
                   GROUP BY evaluasi_2.lls_id)) AND evaluasi_1.eva_jenis = 4::numeric
           ORDER BY evaluasi_1.lls_id)) AND eva.eva_jenis = 4::numeric AND lls.lls_status = 1::numeric AND nev.nev_lulus = 1::numeric
   ORDER BY lls.lls_id DESC;
