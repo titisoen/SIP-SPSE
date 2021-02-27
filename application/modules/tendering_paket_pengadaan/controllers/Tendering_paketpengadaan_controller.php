@@ -58,8 +58,9 @@ class Tendering_paketpengadaan_controller extends CI_Controller {
 																		"<b>Tahun : </b>".$rows_data->tahun."<br>".
 																		"<b>Versi SPSE : </b>".$rows_data->versi_lelang."<br>",
 											"hps"					=> number_format($rows_data->pkt_hps),
+											"kualifikasi"			=> $rows_data->kualifikasi,
 											"pemenang"				=> $rows_data->rkn_nama,
-											"alamat"				=> $rows_data->kbp_nama,
+											"alamat"					=> $rows_data->kbp_nama,
 											"penawaran"				=> number_format($rows_data->harga_terkoreksi),
 											"efisiensi"				=> number_format($rows_data->efisiensi),
 											"prosentase"			=> number_format($rows_data->prosentase, 2)

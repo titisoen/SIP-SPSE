@@ -13,6 +13,7 @@
                             <th width="20%">Nama OPD</th>
                             <th>Nama Paket</th>
                             <th>HPS (Rp.)</th>
+                            <th>Kualifikasi</th>
                             <th>Pemenang</th>
                             <th>Alamat</th>
                             <th>Penawaran</th>
