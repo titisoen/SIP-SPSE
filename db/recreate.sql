@@ -562,7 +562,7 @@ CREATE OR REPLACE VIEW sip.narno_menang AS
    JOIN satuan_kerja stk ON ang.stk_id = stk.stk_id
    JOIN kabupaten kbp ON rkn.kbp_id = kbp.kbp_id
    JOIN propinsi prp ON kbp.prp_id = prp.prp_id
-	 LEFT JOIN ijin_usaha iu ON rkn.rkn_id = iu.rkn_id
+	 LEFT JOIN ijin_usaha iu ON rkn.rkn_id = iu.rkn_id AND pkt.kls_id = iu.kls_id
   WHERE date_part('year'::text, lls.lls_tgl_setuju) > 0::double precision AND (eva.eva_id IN ( SELECT evaluasi_1.eva_id
            FROM evaluasi evaluasi_1
           WHERE ((evaluasi_1.lls_id, evaluasi_1.eva_versi) IN ( SELECT evaluasi_2.lls_id,
