@@ -73,6 +73,7 @@
                                 get_data.baris_data[i].nama_opd,
                                 get_data.baris_data[i].nama_paket,
                                 get_data.baris_data[i].hps,
+                                get_data.baris_data[i].kualifikasi,
                                 get_data.baris_data[i].pemenang,
                                 get_data.baris_data[i].alamat,
                                 get_data.baris_data[i].penawaran,
