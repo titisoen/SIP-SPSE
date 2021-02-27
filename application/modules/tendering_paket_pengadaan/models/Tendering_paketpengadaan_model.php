@@ -80,6 +80,7 @@ class Tendering_paketpengadaan_model extends CI_Model {
             a.pkt_hps,
             a.tahun,
             a.bulan,
+            b.kualifikasi,
             b.rkn_nama,
             b.sbd_ket,
             a.versi_lelang,
