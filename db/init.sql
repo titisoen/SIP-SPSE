@@ -715,29 +715,29 @@ CREATE OR REPLACE VIEW sip.narno_menang AS
 						WHEN iu.kls_id = '23'::bpchar THEN 'Gabungan'::text
 						ELSE 'Belum Pilih Kualifikasi'::text
 				END AS kualifikasi
-   FROM lelang_seleksi lls
-   JOIN paket pkt ON lls.pkt_id = pkt.pkt_id
-   JOIN paket_anggaran pa ON pa.pkt_id = pkt.pkt_id
-   JOIN evaluasi eva ON eva.lls_id = lls.lls_id
-   JOIN nilai_evaluasi nev ON nev.eva_id = eva.eva_id
-   JOIN peserta pst ON pst.psr_id = nev.psr_id
-   JOIN rekanan rkn ON pst.rkn_id = rkn.rkn_id
-   JOIN panitia pnt ON pnt.pnt_id = pkt.pnt_id
-	 JOIN agency agc ON agc.agc_id = pnt.agc_id
-   JOIN anggaran ang ON pa.ang_id = ang.ang_id
-   JOIN satuan_kerja stk ON ang.stk_id = stk.stk_id
-   JOIN kabupaten kbp ON rkn.kbp_id = kbp.kbp_id
-   JOIN propinsi prp ON kbp.prp_id = prp.prp_id
-	 LEFT JOIN ijin_usaha iu ON rkn.rkn_id = iu.rkn_id AND pkt.kls_id = iu.kls_id
+   FROM public.lelang_seleksi lls
+   JOIN public.paket pkt ON lls.pkt_id = pkt.pkt_id
+   JOIN public.paket_anggaran pa ON pa.pkt_id = pkt.pkt_id
+   JOIN public.evaluasi eva ON eva.lls_id = lls.lls_id
+   JOIN public.nilai_evaluasi nev ON nev.eva_id = eva.eva_id
+   JOIN public.peserta pst ON pst.psr_id = nev.psr_id
+   JOIN public.rekanan rkn ON pst.rkn_id = rkn.rkn_id
+   JOIN public.panitia pnt ON pnt.pnt_id = pkt.pnt_id
+	 JOIN public.agency agc ON agc.agc_id = pnt.agc_id
+   JOIN public.anggaran ang ON pa.ang_id = ang.ang_id
+   JOIN public.satuan_kerja stk ON ang.stk_id = stk.stk_id
+   JOIN public.kabupaten kbp ON rkn.kbp_id = kbp.kbp_id
+   JOIN public.propinsi prp ON kbp.prp_id = prp.prp_id
+	 LEFT JOIN public.ijin_usaha iu ON rkn.rkn_id = iu.rkn_id AND pkt.kls_id = iu.kls_id
   WHERE date_part('year'::text, lls.lls_tgl_setuju) > 0::double precision AND (eva.eva_id IN ( SELECT evaluasi_1.eva_id
-           FROM evaluasi evaluasi_1
+           FROM public.evaluasi evaluasi_1
           WHERE ((evaluasi_1.lls_id, evaluasi_1.eva_versi) IN ( SELECT evaluasi_2.lls_id,
                     max(evaluasi_2.eva_versi) AS max
                    FROM evaluasi evaluasi_2
                   GROUP BY evaluasi_2.lls_id)) AND evaluasi_1.eva_jenis = 4::numeric
           ORDER BY evaluasi_1.lls_id)) AND eva.eva_jenis = 4::numeric AND lls.lls_status = 1::numeric AND nev.nev_lulus = 1::numeric
   ORDER BY lls.lls_id DESC;
-
+	
 ALTER TABLE sip.narno_menang OWNER TO epns;
 
 -- TABEL VIEW narno_rup 03 --
