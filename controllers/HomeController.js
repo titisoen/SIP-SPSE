@@ -1,7 +1,12 @@
-const model = require("../models/HomeModel");
+const vars = require("../config/Database");
+
+const pool = vars.db;
 
 const getUsers = (req, res) => {
-    res.send(model.getUsers);
+    pool.query('SELECT * FROM tb_users ORDER BY id ASC', (error, results, fields) => {
+        if (error) throw error;
+        res.send(JSON.stringify(results.rows));
+    })
 }
 
 module.exports = {
